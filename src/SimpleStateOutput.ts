@@ -1,24 +1,31 @@
-const OutputToggleBase = require("./OutputToggleBase.js");
+import { addOutput } from "./ScheduledTask/Scheduler";
+import { SharedRPIO } from "./Components/SharedRPIO";
+import { createOutput } from "./PersistedOutput";
+import { OutputToggleBase } from "./OutputToggleBase";
 
-/**
- * Simple Toggle Based Output 
- * @public
- * @param {object} app - The main app object.
- * @param {string} pin - PIN of the toggle.
- * @param {string} name - Name of output object. Must be unique.
- * @param {function} description - Description of the toggle.
- */
 
-function SimpleStateOutput(app, pin, name, description) {
+export function SimpleStateOutput(pin: number, name: string, description: string): void {
    console.log(`[SimpleStateOutput] Creating simple state output object for ${name}`);
-   app.rpio.open(pin, app.rpio.OUTPUT, app.rpio.LOW);
-   OutputToggleBase(app, name, description, (eventData) => {
-      return new Promise((resolve) => {
-         console.log("SimpleStateOutput", name, "toggling to", eventData.toggleValue);
-         app.rpio.write(pin, eventData.toggleValue ? 1 : 0);
-         resolve();
-      });
-   });
+   addOutput(name);
+   createOutput(name, description)
+   SharedRPIO.open(pin, SharedRPIO.OUTPUT, SharedRPIO.LOW);
+   OutputToggleBase(
+      name,
+      description,
+      (event: { state: any; callback: any; }) => {
+         return new Promise((resolve, reject) => {
+            console.log(`[SimpleStateOutput for ${name}] Executing`);
+            if (event.state) {
+               SharedRPIO.write(pin, SharedRPIO.HIGH);
+            } else {
+               SharedRPIO.write(pin, SharedRPIO.LOW);
+            }
+            resolve({
+               callback: event.callback,
+            });
+         });
+      }
+   )
 }
 
-module.exports = SimpleStateOutput; 
+ 

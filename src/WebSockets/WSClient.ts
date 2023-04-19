@@ -2,6 +2,12 @@ import { io } from "socket.io-client";
 import { config } from "../Components/ConfLoader";
 import {HWID_STRING} from "../Components/HWIDLoader";
 import { SharedEventBus } from "../Components/SharedEventBus";
+import { DeviceBaseToggle } from "../Types/DeviceBaseToggle";
+import { ToggleEvent } from "../Types/ToggleEvent";
+import { localDeviceState } from "../Components/LocalDeviceState";
+import { DeviceReqStatus } from "../Types/DeviceReqStatus";
+import { ScheduledTask } from "../Types/Scheduler";
+import { getScheduledTasks } from "../ScheduledTask/Scheduler";
 export const socket = io(config.syncUrl + "/device", {
    autoConnect: false,
    reconnection: true,
@@ -13,6 +19,26 @@ export const socket = io(config.syncUrl + "/device", {
       deviceToken: config.deviceToken
    }
 });
+
+// Write a function to average the latency of the websocket
+let slidingWindow = new Array<number>();
+function addToSlidingWindow(latency: number) {
+   slidingWindow.push(latency);
+   // Keep the sliding window to 10 items
+   if (slidingWindow.length > 10) {
+      slidingWindow.shift();
+   }
+}
+function average(arr: Array<number>) {
+   let sum = 0;
+   for (let i = 0; i < arr.length; i++) {
+      sum += arr[i];
+   }
+   return sum / arr.length;
+}
+export function getAverageLatency(): number {
+   return average(slidingWindow);
+}
 
 export function connect() {
    console.log("Connecting to server");
@@ -29,8 +55,12 @@ export function connect() {
             console.log("[WSC] Heartbeat failed.");
             console.log(err);
          } else {
+            let latency = (Date.now() - pingStart);
             console.log("[WSC] Heartbeat successful.", data.ts);
-            console.log("[WSC] WebSocket Latency: " + (Date.now() - pingStart) + "ms");
+            console.log("[WSC] WebSocket Latency: " + latency + "ms");
+            addToSlidingWindow(latency);
+            console.log("[WSC] Average Latency: " + getAverageLatency() + "ms");
+            socket.emit("SyncDeviceState", localDeviceState);
          }
       });
    }, 30000);
@@ -39,10 +69,33 @@ export function connect() {
 
 socket.on("connect", () => {
    console.log("Connected to server");
+   // Websocket is connected, emit event for other subsystems to use
    SharedEventBus.emit("WSClientConnected");
+   socket.on("ToggleStateMutate", (data: DeviceBaseToggle, callback) => {
+      console.log("ToggleStateMutate", data.toggleName);
+      const toggleEvent: ToggleEvent = {
+         ...data,
+         callback: callback
+      }
+      SharedEventBus.emit("ToggleEvent", null, toggleEvent);
+   });
+   console.log("Connected, syncing device state", localDeviceState);
+   socket.emit("SyncDeviceState", localDeviceState);
 });
 
 socket.on("disconnect", () => {
    console.log("Disconnected from server");
    SharedEventBus.emit("WSClientDisonnected");
+});
+
+SharedEventBus.on("SystemTriggeredStart", () => {
+   socket.timeout(9000).emit("SyncDeviceState", localDeviceState);
+})
+
+socket.on("getDeviceScheduler", (data, callback: (data: DeviceReqStatus<Array<ScheduledTask>>) => void) => {
+   console.log("getDeviceScheduler");
+   callback({
+      success: true, 
+      data: getScheduledTasks()
+   })
 });

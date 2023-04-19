@@ -1,3 +1,8 @@
+import { config } from "../Components/ConfLoader";
+import { HWID_STRING } from "../Components/HWIDLoader";
+import { SharedEventBus } from "../Components/SharedEventBus";
+import { StreamEvent } from "../Types/StreamEvent";
+
 const { spawn } = require('node:child_process');
 
 /*
@@ -11,32 +16,41 @@ const { spawn } = require('node:child_process');
     every 30 or more seconds, to ensure dropped requests are accounted for
 */
 
-module.exports = function(app) {
-    let currentTimeout = -1;
+module.exports = function() {
+    // -1 means no stream is running
+    // TODO: Make this work with typescript.
+    let currentTimeout: any = -1 ;
     let streamprocess = null;
     
     console.log("[StreamController] Start listening to CameraStreamRequest command")
     function resetStreamer() {
         if (streamprocess) streamprocess.kill("SIGKILL")
         streamprocess = null;
+        
         clearTimeout(currentTimeout);
-        currentTimeout = -1;
+ 
     }
-    app.eventBus.on("CameraStreamRequest", (data) => {
+    SharedEventBus.on("CameraStreamRequest", (data: StreamEvent) => {
         if (currentTimeout === -1) {
             console.log(data);
-            console.log(`[StreamController] Stream is not running, start stream for STREAM_HASH: ${data.data}`);
-            streamprocess = spawn("bash", ["./Stream.sh", data.data, app.HWID_STRING, app.deviceToken] );
+            console.log(`[StreamController] Stream is not running, start stream for STREAM_HASH: ${data.streamHash}`);
+            // We could probably rewrite this to remove the need for a bash script.
+            // but for now this works.
+            streamprocess = spawn("bash", ["/home/captainhandsome/project-tiara-device-client/Stream.sh", data.streamHash, HWID_STRING, config.deviceToken] );
             streamprocess.on("spawn", () => {
-                app.eventBus.emit("AcknowledgeBackendAction", null, data.evHash);
+                console.log("FFMpeg spawned");
                 currentTimeout = setTimeout(resetStreamer, 70000);
+                data.callback({success: true})
             })
+            // Debug 
+            /*
             streamprocess.stdout.on("data", (data) => {
                 console.log(data.toString());
             });
             streamprocess.stderr.on("data", (data) => {
                 console.log(data.toString());
             });
+            */
             streamprocess.on("close", (code) => {
                 console.log("FFMpeg exited with code", code)
                 streamprocess = null;
@@ -45,7 +59,7 @@ module.exports = function(app) {
             });
             
         } else {
-            app.eventBus.emit("AcknowledgeBackendAction", null, data.evHash);
+            data.callback({success: true})
             clearTimeout(currentTimeout);
             currentTimeout = setTimeout(resetStreamer, 70000);
         }

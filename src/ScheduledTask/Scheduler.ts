@@ -1,8 +1,14 @@
 import fs from "node:fs";
 import { SharedEventBus as eventBus } from "../Components/SharedEventBus";
 import { ScheduledTask, SchedulerTime, TempTriggerArray } from "../Types/Scheduler";
+import { Thermometer } from "../Types/DeviceSensors";
 let scheduler: Array<ScheduledTask> = [];
 
+
+
+export function getScheduledTasks(): Array<ScheduledTask> {
+	return scheduler;
+}
 function getSecondsUntilTargetTime(timeArr) {
 	const now = new Date(); // get current date and time
 	const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), timeArr[0], timeArr[1]); // create a new date object with the target time today
@@ -44,7 +50,56 @@ const format = {
 		},
 	},
 };
-
+// Copied from BingGPT. This is a function that will throttle the execution of a function.
+// 
+function throttle(callback: { apply: (arg0: any, arg1: IArguments) => void; }, interval: number) {
+	// Initialize a timer variable
+	let timer = null;
+	// Return a function that will be called when the event occurs
+	return function() {
+	  // If the timer is null, it means we can run the callback function
+	  if (timer === null) {
+		 // Run the callback function
+		 callback.apply(this, arguments);
+		 // Set the timer to wait for the interval before setting it back to null
+		 timer = setTimeout(function() {
+			timer = null;
+		 }, interval);
+	  }
+	};
+ }
+function tempReceiver (data: Thermometer) {
+	
+	for (let i = 0; i < tempTriggerArrays.length; i++) {
+		// Sanity Check first.
+		// If the temp sensor is messed up (data.temperature) is below -50 or above 100, it means something is wrong within the sensor.
+		// BESIDES, raspberry pi is not meant to be used in extreme temperatures.
+		if (data.Temperature < -50 || data.Temperature > 100) {
+			console.error("[Scheduler] Temperature sensor seems to be malfunctioning. Skipping temperature triggers.");
+		} else {
+			const trigger = tempTriggerArrays[i];
+			// If current temperature is within the range, turn on the output.
+			// If current tempearture is lower than the lower bound, turn off the output.
+			// If current temperature is higher than the upper bound, the output should remain on.
+			if (data.Temperature >= trigger.triggerOnTemp && data.Temperature <= trigger.triggerOnTemp) {
+				executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
+			} else if (data.Temperature < trigger.triggerOffTemp) {
+				executeTemp(trigger.scheduledTaskName, trigger, "temp", false);
+			} else if (data.Temperature > trigger.triggerOnTemp) {
+				// The current temperature is higher than the upper bound, but the output should remain on.
+				executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
+			} else {
+				console.warn(
+					"[Scheduler] What is happening key:%s eventTemp:%sC lowBound: %sC highBound: %sC.",
+					trigger.scheduledTaskName,
+					data.Temperature,
+					trigger.triggerOffTemp,
+					trigger.triggerOnTemp
+				);
+			}
+		}
+	}
+}
 export function initScheduler() {
 	console.log("[Scheduler] Starting scheduler...");
 	if (fs.existsSync("/home/captainhandsome/project-tiara-persistent/scheduler.json")) {
@@ -65,39 +120,10 @@ export function initScheduler() {
 	
 	eventBus.emit("scheduler.ready", null, scheduler);
 	// Our tempearture sensor sends data every 2 seconds.
-	// We should have a mechanism to reduce the rate to about every 1 minute.
+	// We should have a mechanism to reduce the rate to about every 3/4 of a minute.
 	// This is to prevent the scheduler from being overwhelmed with data.
 	// TODO: Implement a mechanism to reduce the rate of data.
-	eventBus.on("sensors.temp.inside", (data) => {
-		for (let i = 0; i < tempTriggerArrays.length; i++) {
-			// Sanity Check first.
-			// If the temp sensor is messed up (data.temperature) is below -50 or above 100, it means something is wrong within the sensor.
-			if (data.temperature < -50 || data.temperature > 100) {
-				console.error("[Scheduler] Temperature sensor is malfunctioning. Skipping temperature triggers.");
-			} else {
-				const trigger = tempTriggerArrays[i];
-				// If current temperature is within the range, turn on the output.
-				// If current tempearture is lower than the lower bound, turn off the output.
-				// If current temperature is higher than the upper bound, the output should remain on.
-				if (data.temperature >= trigger.triggerOnTemp && data.value <= trigger.triggerOnTemp) {
-					executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
-				} else if (data.temperature < trigger.triggerOffTemp) {
-					executeTemp(trigger.scheduledTaskName, trigger, "temp", false);
-				} else if (data.temperature > trigger.triggerOnTemp) {
-					// The current temperature is higher than the upper bound, but the output should remain on.
-					executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
-				} else {
-					console.warn(
-						"[Scheduler] What is happening key:%s eventTemp:%sC lowBound: %sC highBound: %sC.",
-						trigger.scheduledTaskName,
-						data.temperature,
-						trigger.triggerOffTemp,
-						trigger.triggerOnTemp
-					);
-				}
-			}
-		}
-	});
+	eventBus.on("sensors.temp.inside", throttle(tempReceiver, 45000));
 	ParseSchedulesAndTriggers();
  
 }
@@ -388,7 +414,10 @@ export function reloadSchedules() {
    // Reload schedules
 
    scheduler = JSON.parse(fs.readFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", "utf-8"));
-   ParseSchedulesAndTriggers();
+   
+ 
+	ParseSchedulesAndTriggers();
+	
 }
 
 export function applyNewSchedules(schedules) {
@@ -407,6 +436,9 @@ export function applyNewSchedules(schedules) {
 
 export function addOutput(outputName) {
    // Creates an output.
+	// We will also register this to our DeviceState.
+	
+
    if (scheduler[outputName]) {
       console.log("[Scheduler] Output already registered.");
    } else {

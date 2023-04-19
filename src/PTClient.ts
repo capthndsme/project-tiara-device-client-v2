@@ -1,7 +1,18 @@
 import { SharedEventBus } from "./Components/SharedEventBus";
+import fs from "node:fs"
 import * as WSClient from "./WebSockets/WSClient"
 import * as Scheduler from "./ScheduledTask/Scheduler"
 console.log("[PTClient] Initialising client...");
 Scheduler.initScheduler();
-WSClient.connect();
+// Load our outputs here...
+fs.readdirSync(__dirname + "/Output/").forEach((file) => {
+   if (file.endsWith(".map")) return; // Do not attempt to load .map files.
+   console.log(`[PTClient] Loading output ${file}`);
+      import(`${__dirname}/Output/${file}`).then((output) => {
+      console.log(`[PTClient] Loaded output ${file}`);
+      
+   });
+});
 SharedEventBus.emit("StartEvent")
+
+WSClient.connect();
