@@ -2,10 +2,11 @@ import { addOutput } from "./ScheduledTask/Scheduler";
 import { SharedEventBus } from "./Components/SharedEventBus";
 import { createOutput, findToggle, releaseOutput, toggleOutput, tryLockOutput } from "./PersistedOutput";
 import { ToggleEvent } from "./Types/ToggleEvent";
-export function OutputToggleBase(outputName: string, outputDescription: string = "", executeFunction: Function) {
+import { ToggleType } from "./Types/DeviceBaseToggle";
+export function OutputToggleBase(outputName: string, outputDescription: string = "", toggleType: ToggleType, executeFunction: Function) {
 	console.log(`[OutputToggleBase] Creating ToggleBase for ${outputName}`);
 
-	createOutput(outputName, outputDescription);
+	createOutput(outputName, outputDescription, toggleType);
 	addOutput(outputName);
 	// ToggleEvent is emitted by our WebSocketClient when a user clicks a button.
 	// ToggleEventSystemTriggered is emitted by our Scheduler when a scheduled task is triggered.

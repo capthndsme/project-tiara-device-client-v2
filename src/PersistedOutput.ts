@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { DeviceBaseToggle, createToggleTemplate } from "./Types/DeviceBaseToggle";
+import { DeviceBaseToggle, ToggleType, createToggleTemplate } from "./Types/DeviceBaseToggle";
 const PersistedFile = "/home/captainhandsome/project-tiara-persistent/PersistedOutputs.json";
 export let localData: DeviceBaseToggle[] = [];
 
@@ -30,13 +30,13 @@ export function saveDataSync(): void {
    fs.writeFileSync(PersistedFile, JSON.stringify(localData));
 }
 
-export function createOutput(toggleName: string, toggleDescription: string): void {
+export function createOutput(toggleName: string, toggleDescription: string, toggleType: ToggleType): void {
    if (findToggle(toggleName)) {
       console.log(`Output ${toggleName} already registered.`);
       return;
    }
    console.log(`Registering output ${toggleName}: ${toggleDescription}`);
-   let toggle = createToggleTemplate(toggleName, toggleDescription);
+   let toggle = createToggleTemplate(toggleName, toggleDescription, toggleType);
    localData.push(toggle);
    saveDataSync();
 }

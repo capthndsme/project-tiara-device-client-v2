@@ -92,10 +92,7 @@ SharedEventBus.on("SystemTriggeredStart", () => {
    socket.timeout(9000).emit("SyncDeviceState", localDeviceState);
 })
 
-socket.on("getDeviceScheduler", (data, callback: (data: DeviceReqStatus<Array<ScheduledTask>>) => void) => {
+socket.on("getDeviceScheduler", (data, callback: (data: Array<ScheduledTask>) => void) => {
    console.log("getDeviceScheduler");
-   callback({
-      success: true, 
-      data: getScheduledTasks()
-   })
+   callback(getScheduledTasks())
 });

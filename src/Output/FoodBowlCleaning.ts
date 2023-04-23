@@ -1,13 +1,14 @@
 import { OutputToggleBase } from "../OutputToggleBase";
 import { sleep } from "../Components/sleep";
 import * as servoManager from "../Components/ServoManager";
+import { ToggleType } from "../Types/DeviceBaseToggle";
 
 fcb();
 
 async function fcb() {
 	try {
 		// Ensures we register the output first so the system knows about it.
-		OutputToggleBase("foodbowlClean", "Foodbowl Cleaning", async (outputExecute) => {
+		OutputToggleBase("foodbowlClean", "Foodbowl Cleaning", ToggleType.ONEOFF, async (outputExecute) => {
 			try {
 				await servoManager.write(0, 90);
 				await sleep(2000);
