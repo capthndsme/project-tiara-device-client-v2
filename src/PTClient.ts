@@ -1,8 +1,13 @@
+#!/usr/bin/env node
+
 import { SharedEventBus } from "./Components/SharedEventBus";
 import fs from "node:fs"
 // Initialise our ServoController as early as possible. Ignore the warning about unused vars.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars 
-import { write as ServoWrite } from "./ServoController"; 
+import * as ServoController from "./ServoController"; 
+ServoController.port.open(() => {
+   console.log("[PTClient] ServoController open success.");
+})
 import * as WSClient from "./WebSockets/WSClient"
 import * as Scheduler from "./ScheduledTask/Scheduler"
 console.log("[PTClient] Initialising client...");
@@ -19,3 +24,4 @@ fs.readdirSync(__dirname + "/Output/").forEach((file) => {
 SharedEventBus.emit("StartEvent")
 
 WSClient.connect();
+

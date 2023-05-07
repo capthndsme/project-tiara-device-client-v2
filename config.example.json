@@ -1,5 +1,6 @@
 {
    "syncUrl": "http://project-tiara-backend-server.?? (Whatever runs the backend server.)", 
    "serverDeviceId": 1,
+   "servoController":"/dev/ttyACM0",
    "deviceToken": "?? (Register your device to the backend server. (Device registration / setup is a WIP))"
 }

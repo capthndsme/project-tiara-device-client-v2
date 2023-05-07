@@ -1,4 +1,4 @@
-import { io } from "socket.io-client";
+import { Socket, io } from "socket.io-client";
 import { config } from "../Components/ConfLoader";
 import {HWID_STRING} from "../Components/HWIDLoader";
 import { SharedEventBus } from "../Components/SharedEventBus";
@@ -39,20 +39,31 @@ function average(arr: Array<number>) {
 export function getAverageLatency(): number {
    return average(slidingWindow);
 }
-
+let connectFailCount = 0;
 export function connect() {
    console.log("Connecting to server");
    // This ensures our connection
    setInterval(() => {
       if (!socket.connected) {
          console.log("[WSC] Socket not connected, reconnecting");
-         socket.connect();
+         connectFailCount++;
+         if (connectFailCount > 5) {
+            console.log("[WSC] We have failed to connect 5 times, we will now exit.");
+            console.log("[WSC] TIP: This should be running under systemd or pm2, so it will restart automatically.")
+            // quit the process, so systemd or pm2 can restart it.
+            // we are doing this because, sometimes, the websocket will fail to reconnect.
+            // besides, its a good idea to restart the process every now and then.
+            return process.exit(1);
+         }
+         return socket.connect();
       }
       console.log("[WSC] Sending heartbeat.")
       let pingStart = Date.now();
       socket.timeout(15000).emit("heartbeat", null, (err: boolean, data: any) => {
          if (err) {
-            console.log("[WSC] Heartbeat failed.");
+            console.log("[WSC] Heartbeat failed. Trying to reconnect.");
+            if (!socket.connected) socket.connect();
+            connectFailCount++;
             console.log(err);
          } else {
             let latency = (Date.now() - pingStart);
@@ -60,6 +71,8 @@ export function connect() {
             console.log("[WSC] WebSocket Latency: " + latency + "ms");
             addToSlidingWindow(latency);
             console.log("[WSC] Average Latency: " + getAverageLatency() + "ms");
+            console.log("[WSC] Since we are connected, we will reset the connectFailCount");
+            connectFailCount = 0;
             socket.emit("SyncDeviceState", localDeviceState);
          }
       });
@@ -81,6 +94,9 @@ socket.on("connect", () => {
    });
    console.log("Connected, syncing device state", localDeviceState);
    socket.emit("SyncDeviceState", localDeviceState);
+   socket.on("CameraStreamRequest", (data: any, callback: any) => {
+      SharedEventBus.emit("CameraStreamRequest", null, {...data, callback});
+   });
 });
 
 socket.on("disconnect", () => {
@@ -96,3 +112,7 @@ socket.on("getDeviceScheduler", (data, callback: (data: Array<ScheduledTask>) =>
    console.log("getDeviceScheduler");
    callback(getScheduledTasks())
 });
+
+export function getSocket(): Socket {
+   return socket;
+}

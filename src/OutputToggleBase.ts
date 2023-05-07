@@ -25,7 +25,7 @@ export function OutputToggleBase(outputName: string, outputDescription: string =
 					toggleOutput(outputName, event.toggleValue);
 					if (event.callback) {
 						event.callback({
-							hasError: false,
+							hasError: executeResult?executeResult:false,// If executeResult is undefined, we assume no error.
 						});
 					}
 				});

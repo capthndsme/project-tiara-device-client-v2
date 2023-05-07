@@ -2,7 +2,8 @@ import fs from "node:fs";
 type Config = {
       "syncUrl": string,
       "serverDeviceId": number,
-      "deviceToken": string
+      "deviceToken": string,
+      "servoController": string
 }
 
 // Load the config file
