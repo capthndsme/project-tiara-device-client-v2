@@ -19,6 +19,11 @@ export let thermometerRegions: ThermometerRegions = {
 // We should also set up a timer to update the values every 3 seconds.
 // Additionally, we will emit an event when the values change (for Triggers System)
 
+/**
+ * MAJOR WARNING TO THERMOMETERS CODE:
+ * Apparently, a failed read will cause our ServoController to hangup.
+ * It is not clear why this happens. 
+ */
 sensor.initialize(22, 4);
 sensor.initialize(22, 22);
 sensor.setMaxRetries(2);
@@ -42,3 +47,4 @@ setInterval(() => {
 		}
 	});
 }, 3000);
+

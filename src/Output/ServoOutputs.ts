@@ -134,10 +134,36 @@ function FoodBowlClean(event: ToggleEvent) {
    });
 }
 
+function PoopPadFrontCleaning() {
+   return new Promise((resolve) => {
+      GenericServoRepeating(
+         ServoTypes.PoopPad1,
+         135, // 135 degrees means a slower clockwise rotation in an continuous servo. 
+         90,  // 90 degrees means stop .
+         400, // 400ms start
+         400, // 400ms duration (time to reach 90 degrees)
+         2    // 2 repeats
+      )
+   });
+}
+function PoopPadBackCleaning() {
+   return new Promise((resolve) => {
+      GenericServoRepeating(
+         ServoTypes.PoopPad1,
+         45, // 45 degrees means a slower counter-clockwise rotation in an continuous servo. 
+         90, // 90 degrees means stop .
+         400,
+         400,
+         2
+      )
+   });
+}
+
 
 OutputToggleBase("foodDispense", "Dispense Food", ToggleType.ONEOFF, FoodBowlDispense);
 OutputToggleBase("foodbowlClean", "Clean foodbowl", ToggleType.ONEOFF, FoodBowlClean);
-OutputToggleBase("poopPadFront", "Poop Pad Cleaning (front)", ToggleType.ONEOFF, FoodBowlClean);
-OutputToggleBase("poopPadBack", "Poop Pad Cleaning (back)", ToggleType.ONEOFF, FoodBowlClean);
-// Door lock: Not implemented yet.
+OutputToggleBase("poopPadFront", "Poop Pad Cleaning (front)", ToggleType.ONEOFF, PoopPadFrontCleaning);
+OutputToggleBase("poopPadBack", "Poop Pad Cleaning (back)", ToggleType.ONEOFF, PoopPadBackCleaning);
+// Door lock: Not implemented yet. Waiting for servo to arrive.
 OutputToggleBase("doorLock", "Door Lock", ToggleType.SWITCH, (event) => Promise.resolve(true));
+   
