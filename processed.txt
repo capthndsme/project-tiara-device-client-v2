@@ -1,0 +1,1107 @@
+Statistical profiling result from isolate-0x48beaf8-1080-v8.log, (4185 ticks, 1 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   1283   30.7%          /usr/bin/node
+     31    0.7%          /usr/lib/arm-linux-gnueabihf/libc-2.31.so
+     18    0.4%          /usr/lib/arm-linux-gnueabihf/libstdc++.so.6.0.28
+     16    0.4%          [vectors]
+      2    0.0%          [vdso]
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+      6    0.1%    0.2%  LazyCompile: *normalizeString node:path:66:25
+      2    0.0%    0.1%  Function: ^realpathSync node:fs:2502:22
+      2    0.0%    0.1%  Function: ^nextTick node:internal/process/task_queues:103:18
+      2    0.0%    0.1%  Function: ^Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      2    0.0%    0.1%  Function: ^Module._nodeModulePaths node:internal/modules/cjs/loader:747:37
+      2    0.0%    0.1%  Function: ^<anonymous> node:internal/fs/utils:360:35
+      1    0.0%    0.0%  RegExp: ^((?:(?:[0-9a-fA-F]{1,4}):){7}(?:(?:[0-9a-fA-F]{1,4})|:)|(?:(?:[0-9a-fA-F]{1,4}):){6}(?:((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|:(?:[0-9a-fA-F]{1,4})|:)|(?:(?:[0-9a-fA-F]{1,4}):){5}(?::((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|(:(?:[0-9a-fA-F]{1,4})){1,2}|:)|(?:(?:[0-9a-fA-F]{1,4}):){4}(?:(:(?:[0-9a-fA-F]{1,4})){0,1}:((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|(:(?:[0-9a-fA-F]{1,4})){1,3}|:)|(?:(?:[0-9a-fA-F]{1,4}):){3}(?:(:(?:[0-9a-fA-F]{1,4})){0,2}:((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|(:(?:[0-9a-fA-F]{1,4})){1,4}|:)|(?:(?:[0-9a-fA-F]{1,4}):){2}(?:(:(?:[0-9a-fA-F]{1,4})){0,3}:((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|(:(?:[0-9a-fA-F]{1,4})){1,5}|:)|(?:(?:[0-9a-fA-F]{1,4}):){1}(?:(:(?:[0-9a-fA-F]{1,4})){0,4}:((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|(:(?:[0-9a-fA-F]{1,4})){1,6}|:)|(?::((?::(?:[0-9a-fA-F]{1,4})){0,5}:((?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])[.]){3}(?:[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])|(?::(?:[0-9a-fA-F]{1,4})){1,7}|:)))(%[0-9a-zA-Z-.:]{1,})?$
+      1    0.0%    0.0%  RegExp: %2F|%5C
+      1    0.0%    0.0%  Function: ^writeFileSync node:fs:2235:23
+      1    0.0%    0.0%  Function: ^value node:internal/console/constructor:315:20
+      1    0.0%    0.0%  Function: ^value node:internal/console/constructor:272:20
+      1    0.0%    0.0%  Function: ^syncExports node:internal/bootstrap/loaders:307:14
+      1    0.0%    0.0%  Function: ^popAsyncContext node:internal/async_hooks:553:25
+      1    0.0%    0.0%  Function: ^openSync node:fs:592:18
+      1    0.0%    0.0%  Function: ^once node:events:646:44
+      1    0.0%    0.0%  Function: ^normalizeString node:path:66:25
+      1    0.0%    0.0%  Function: ^needFinish node:internal/streams/writable:653:20
+      1    0.0%    0.0%  Function: ^isUint8Array node:internal/util/types:13:22
+      1    0.0%    0.0%  Function: ^internalCompileFunction node:internal/vm:31:33
+      1    0.0%    0.0%  Function: ^getOptions node:internal/fs/utils:318:20
+      1    0.0%    0.0%  Function: ^get node:net:2162:6
+      1    0.0%    0.0%  Function: ^get node:internal/console/constructor:209:14
+      1    0.0%    0.0%  Function: ^formatWithOptionsInternal node:internal/util/inspect:2154:35
+      1    0.0%    0.0%  Function: ^emitAfterScript node:internal/async_hooks:517:25
+      1    0.0%    0.0%  Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1    0.0%    0.0%  Function: ^checkListener node:events:265:23
+      1    0.0%    0.0%  Function: ^alignPool node:buffer:174:19
+      1    0.0%    0.0%  Function: ^_onceWrap node:events:632:19
+      1    0.0%    0.0%  Function: ^_isValidUTF8 /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/validation.js:53:22
+      1    0.0%    0.0%  Function: ^_getMaxListeners node:events:414:26
+      1    0.0%    0.0%  Function: ^Module._load node:internal/modules/cjs/loader:886:24
+      1    0.0%    0.0%  Function: ^<anonymous> node:internal/validators:138:40
+
+ [C++]:
+   ticks  total  nonlib   name
+   1372   32.8%   48.4%  node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+    284    6.8%   10.0%  node::errors::PerIsolateMessageListener(v8::Local<v8::Message>, v8::Local<v8::Value>)
+    273    6.5%    9.6%  node::crypto::DeriveBitsJob<node::crypto::HmacTraits>::MemoryInfo(node::MemoryTracker*) const
+    170    4.1%    6.0%  __write@@GLIBC_2.4
+     56    1.3%    2.0%  epoll_pwait@@GLIBC_2.6
+     56    1.3%    2.0%  __lll_lock_wait
+     55    1.3%    1.9%  fwrite@@GLIBC_2.4
+     51    1.2%    1.8%  node::crypto::CryptoJob<node::crypto::ScryptTraits>::MemoryInfo(node::MemoryTracker*) const
+     39    0.9%    1.4%  std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, int)@@GLIBCXX_3.4.9
+     34    0.8%    1.2%  node::http2::Http2Session::Callbacks::Callbacks(bool)
+     28    0.7%    1.0%  void node::Buffer::(anonymous namespace)::StringWrite<(node::encoding)4>(v8::FunctionCallbackInfo<v8::Value> const&)
+     27    0.6%    1.0%  node::tracing::NodeTraceWriter::~NodeTraceWriter()
+     19    0.5%    0.7%  __mprotect@@GLIBC_PRIVATE
+     14    0.3%    0.5%  memcpy@@GLIBC_2.4
+     13    0.3%    0.5%  node::crypto::RandomBytesTraits::AdditionalConfig(node::crypto::CryptoJobMode, v8::FunctionCallbackInfo<v8::Value> const&, unsigned int, node::crypto::RandomBytesConfig*)
+     13    0.3%    0.5%  node::(anonymous namespace)::Parser::New(v8::FunctionCallbackInfo<v8::Value> const&)
+     13    0.3%    0.5%  _IO_file_xsputn@@GLIBC_2.4
+     12    0.3%    0.4%  std::ostream::sentry::sentry(std::ostream&)@@GLIBCXX_3.4
+     11    0.3%    0.4%  __libc_malloc@@GLIBC_2.4
+     10    0.2%    0.4%  node::fs::Stat(v8::FunctionCallbackInfo<v8::Value> const&)
+      9    0.2%    0.3%  v8::internal::CallPrinter::VisitNoStackOverflowCheck(v8::internal::AstNode*)
+      9    0.2%    0.3%  memcpy
+      8    0.2%    0.3%  std::ostream& std::ostream::_M_insert<long>(long)@@GLIBCXX_3.4.9
+      8    0.2%    0.3%  node::builtins::BuiltinLoader::LoadJavaScriptSource()
+      8    0.2%    0.3%  __pthread_mutex_unlock_usercnt
+      7    0.2%    0.2%  std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const@@GLIBCXX_3.4
+      7    0.2%    0.2%  memset
+      6    0.1%    0.2%  node::tracing::NodeTraceWriter::NodeTraceWriter(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+      6    0.1%    0.2%  node::http2::Http2Settings::MemoryInfo(node::MemoryTracker*) const
+      6    0.1%    0.2%  memcmp
+      6    0.1%    0.2%  __udivmoddi4@@GCC_3.0
+      6    0.1%    0.2%  __pthread_cond_wait
+      5    0.1%    0.2%  strlen
+      5    0.1%    0.2%  node::(anonymous namespace)::InitializeHttpParser(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>, void*)
+      5    0.1%    0.2%  cfree@GLIBC_2.4
+      4    0.1%    0.1%  node::fs::Mkdtemp(v8::FunctionCallbackInfo<v8::Value> const&)
+      4    0.1%    0.1%  __GI___pthread_rwlock_unlock
+      3    0.1%    0.1%  void node::Buffer::(anonymous namespace)::StringWrite<(node::encoding)3>(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.1%    0.1%  v8::NewContext(v8::Isolate*, v8::ExtensionConfiguration*, v8::MaybeLocal<v8::ObjectTemplate>, v8::MaybeLocal<v8::Value>, unsigned int, v8::DeserializeInternalFieldsCallback, v8::MicrotaskQueue*)
+      3    0.1%    0.1%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int>(char const*, char const*&&, unsigned int&&)
+      3    0.1%    0.1%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int, unsigned int&>(char const*, char const*&&, unsigned int&&, unsigned int&)
+      3    0.1%    0.1%  non-virtual thunk to node::crypto::CryptoJob<node::crypto::HmacTraits>::AfterThreadPoolWork(int)
+      3    0.1%    0.1%  node::inspector::protocol::TracingAgent::getCategories(std::unique_ptr<node::inspector::protocol::Array<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::default_delete<node::inspector::protocol::Array<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >*)
+      3    0.1%    0.1%  node::http2::Http2StreamListener::OnStreamRead(int, uv_buf_t const&)
+      3    0.1%    0.1%  node::DefineConstants(v8::Isolate*, v8::Local<v8::Object>)
+      3    0.1%    0.1%  node::(anonymous namespace)::DefineSignalConstants(v8::Local<v8::Object>)
+      3    0.1%    0.1%  napi_call_threadsafe_function
+      3    0.1%    0.1%  __udivsi3@@GCC_3.0
+      3    0.1%    0.1%  __munmap@@GLIBC_PRIVATE
+      3    0.1%    0.1%  __GI___pthread_rwlock_wrlock
+      3    0.1%    0.1%  __GI___pthread_mutex_lock
+      2    0.0%    0.1%  v8::internal::CallPrinter::VisitProperty(v8::internal::Property*)
+      2    0.0%    0.1%  v8::internal::CallPrinter::VisitCompoundAssignment(v8::internal::CompoundAssignment*)
+      2    0.0%    0.1%  v8::internal::CallPrinter::VisitClassLiteral(v8::internal::ClassLiteral*)
+      2    0.0%    0.1%  v8::String::NewFromOneByte(v8::Isolate*, unsigned char const*, v8::NewStringType, int)
+      2    0.0%    0.1%  v8::String::Concat(v8::Isolate*, v8::Local<v8::String>, v8::Local<v8::String>)
+      2    0.0%    0.1%  strcmp@@GLIBC_2.4
+      2    0.0%    0.1%  std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long long) const@@GLIBCXX_3.4
+      2    0.0%    0.1%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintF<char const*, unsigned int, unsigned int, char const*>(char const*, char const*&&, unsigned int&&, unsigned int&&, char const*&&)
+      2    0.0%    0.1%  operator new(unsigned int)@@GLIBCXX_3.4
+      2    0.0%    0.1%  node::os::GetUserInfo(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.0%    0.1%  node::loader::ModuleWrap::New(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.0%    0.1%  node::http2::Http2Session::OnHeaderCallback(nghttp2_session*, nghttp2_frame const*, nghttp2_rcbuf*, nghttp2_rcbuf*, unsigned char, void*)
+      2    0.0%    0.1%  memmove
+      2    0.0%    0.1%  __libc_read
+      2    0.0%    0.1%  __aeabi_uidivmod@@GCC_3.5
+      1    0.0%    0.0%  void std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >::_M_assign_aux<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const*, std::forward_iterator_tag) [clone .constprop.768]
+      1    0.0%    0.0%  v8::internal::FunctionLiteral::GetDebugName() const
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitObjectLiteral(v8::internal::ObjectLiteral*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitInitializeClassMembersStatement(v8::internal::InitializeClassMembersStatement*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitCountOperation(v8::internal::CountOperation*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitBlock(v8::internal::Block*)
+      1    0.0%    0.0%  v8::internal::AstValueFactory::GetString(unsigned int, bool, v8::base::Vector<unsigned char const>)
+      1    0.0%    0.0%  v8::String::Utf8Length(v8::Isolate*) const
+      1    0.0%    0.0%  v8::String::NewFromTwoByte(v8::Isolate*, unsigned short const*, v8::NewStringType, int)
+      1    0.0%    0.0%  v8::Proxy::CheckCast(v8::Value*)
+      1    0.0%    0.0%  v8::Object::New(v8::Isolate*, v8::Local<v8::Value>, v8::Local<v8::Name>*, v8::Local<v8::Value>*, unsigned int)
+      1    0.0%    0.0%  v8::HeapSpaceStatistics::HeapSpaceStatistics()
+      1    0.0%    0.0%  v8::HeapObjectStatistics::HeapObjectStatistics()
+      1    0.0%    0.0%  v8::Context::SetContinuationPreservedEmbedderData(v8::Local<v8::Value>)
+      1    0.0%    0.0%  std::ostream& std::ostream::_M_insert<unsigned long long>(unsigned long long)@@GLIBCXX_3.4.9
+      1    0.0%    0.0%  std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long long) const@@GLIBCXX_3.4
+      1    0.0%    0.0%  std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, int)@@GLIBCXX_3.4
+      1    0.0%    0.0%  std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned int) const@@GLIBCXX_3.4.18
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<unsigned int, unsigned int, char const*>(char const*, unsigned int&&, unsigned int&&, char const*&&)
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<unsigned int, unsigned int&>(char const*, unsigned int&&, unsigned int&)
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int, unsigned int, char const*>(char const*, char const*&&, unsigned int&&, unsigned int&&, char const*&&)
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int&>(char const*, char const*&&, unsigned int&)
+      1    0.0%    0.0%  std::_Rb_tree_decrement(std::_Rb_tree_node_base*)@@GLIBCXX_3.4
+      1    0.0%    0.0%  std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+      1    0.0%    0.0%  shutdown@@GLIBC_2.4
+      1    0.0%    0.0%  operator new[](unsigned int, std::nothrow_t const&)@@GLIBCXX_3.4
+      1    0.0%    0.0%  operator new[](unsigned int)@@GLIBCXX_3.4
+      1    0.0%    0.0%  operator delete(void*)@@GLIBCXX_3.4
+      1    0.0%    0.0%  node::wasi::WASI::FdPrestatDirName(v8::FunctionCallbackInfo<v8::Value> const&)
+      1    0.0%    0.0%  node::options_parser::OptionsParser<node::DebugOptions>::Implies(char const*, char const*)
+      1    0.0%    0.0%  node::inspector::InspectorIo::ThreadMain()
+      1    0.0%    0.0%  node::inspector::(anonymous namespace)::ChannelImpl::sendResponse(int, std::unique_ptr<v8_inspector::StringBuffer, std::default_delete<v8_inspector::StringBuffer> >)
+      1    0.0%    0.0%  node::http2::Http2Session::diagnostic_name[abi:cxx11]() const
+      1    0.0%    0.0%  node::crypto::CipherJob<node::crypto::RSACipherTraits>::DoThreadPoolWork()
+      1    0.0%    0.0%  node::cares_wrap::(anonymous namespace)::AfterGetAddrInfo(uv_getaddrinfo_s*, int, addrinfo*)
+      1    0.0%    0.0%  node::binding::DLib::Close()
+      1    0.0%    0.0%  node::ThreadPoolWork::ScheduleWork()::{lambda(uv_work_s*, int)#2}::_FUN(uv_work_s*, int)
+      1    0.0%    0.0%  node::StartExecution(node::Environment*, std::function<v8::MaybeLocal<v8::Value> (node::StartExecutionCallbackInfo const&)>)
+      1    0.0%    0.0%  node::SplitString(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char, bool)
+      1    0.0%    0.0%  node::Realm::DeserializeProperties(node::RealmSerializeInfo const*)
+      1    0.0%    0.0%  node::MakeLibuvRequestCallback<uv_udp_send_s, void (*)(uv_udp_send_s*, int)>::Wrapper(uv_udp_send_s*, int)
+      1    0.0%    0.0%  node::CallbackQueue<void, node::Environment*>::CallbackImpl<node::cares_wrap::QueryWrap<node::cares_wrap::TxtTraits>::QueueResponseCallback(int)::{lambda(node::Environment*)#1}>::Call(node::Environment*)
+      1    0.0%    0.0%  node::AsyncWrap::EmitTraceEventAfter(node::AsyncWrap::ProviderType, double)
+      1    0.0%    0.0%  node::(anonymous namespace)::Parser::Proxy<int (node::(anonymous namespace)::Parser::*)(char const*, unsigned int), &node::(anonymous namespace)::Parser::on_url>::Raw(llhttp__internal_s*, char const*, unsigned int)
+      1    0.0%    0.0%  node::(anonymous namespace)::Parser::Proxy<int (node::(anonymous namespace)::Parser::*)(), &node::(anonymous namespace)::Parser::on_message_complete>::Raw(llhttp__internal_s*)
+      1    0.0%    0.0%  napi_remove_wrap
+      1    0.0%    0.0%  memchr@@GLIBC_2.4
+      1    0.0%    0.0%  fputc@@GLIBC_2.4
+      1    0.0%    0.0%  fflush@@GLIBC_2.4
+      1    0.0%    0.0%  ceil@@GLIBC_2.4
+      1    0.0%    0.0%  __sched_yield@@GLIBC_2.4
+      1    0.0%    0.0%  __pthread_cond_signal
+      1    0.0%    0.0%  __popcountsi2@@GCC_3.4
+      1    0.0%    0.0%  __mmap@@GLIBC_PRIVATE
+      1    0.0%    0.0%  __errno_location
+      1    0.0%    0.0%  __divsi3@@GCC_3.0
+      1    0.0%    0.0%  __aeabi_uldivmod@@GCC_3.5
+      1    0.0%    0.0%  __GI___pthread_rwlock_rdlock
+      1    0.0%    0.0%  _IO_file_write@@GLIBC_2.4
+      1    0.0%    0.0%  _IO_file_sync@@GLIBC_2.4
+      1    0.0%    0.0%  _IO_do_write@@GLIBC_2.4
+
+ [Summary]:
+   ticks  total  nonlib   name
+     42    1.0%    1.5%  JavaScript
+   2792   66.7%   98.5%  C++
+    174    4.2%    6.1%  GC
+   1350   32.3%          Shared libraries
+      1    0.0%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+   1372   50.2%   32.8%  node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+    284   10.4%    6.8%  node::errors::PerIsolateMessageListener(v8::Local<v8::Message>, v8::Local<v8::Value>)
+    273   10.0%    6.5%  node::crypto::DeriveBitsJob<node::crypto::HmacTraits>::MemoryInfo(node::MemoryTracker*) const
+    117    4.3%    2.8%  __write@@GLIBC_2.4
+    105    3.8%    2.5%  node::inspector::protocol::TracingAgent::getCategories(std::unique_ptr<node::inspector::protocol::Array<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::default_delete<node::inspector::protocol::Array<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >*)
+    101    3.7%    2.4%  node::wasi::WASI::FdPrestatDirName(v8::FunctionCallbackInfo<v8::Value> const&)
+     51    1.9%    1.2%  node::crypto::CryptoJob<node::crypto::ScryptTraits>::MemoryInfo(node::MemoryTracker*) const
+     34    1.2%    0.8%  node::http2::Http2Session::Callbacks::Callbacks(bool)
+     31    1.1%    0.7%  fwrite@@GLIBC_2.4
+     28    1.0%    0.7%  void node::Buffer::(anonymous namespace)::StringWrite<(node::encoding)4>(v8::FunctionCallbackInfo<v8::Value> const&)
+     27    1.0%    0.6%  node::tracing::NodeTraceWriter::~NodeTraceWriter()
+     24    0.9%    0.6%  std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, int)@@GLIBCXX_3.4.9
+     14    0.5%    0.3%  node::http2::Http2Session::OnHeaderCallback(nghttp2_session*, nghttp2_frame const*, nghttp2_rcbuf*, nghttp2_rcbuf*, unsigned char, void*)
+     13    0.5%    0.3%  std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+     13    0.5%    0.3%  node::crypto::RandomBytesTraits::AdditionalConfig(node::crypto::CryptoJobMode, v8::FunctionCallbackInfo<v8::Value> const&, unsigned int, node::crypto::RandomBytesConfig*)
+     13    0.5%    0.3%  node::(anonymous namespace)::Parser::New(v8::FunctionCallbackInfo<v8::Value> const&)
+     13    0.5%    0.3%  __mprotect@@GLIBC_PRIVATE
+     10    0.4%    0.2%  node::fs::Stat(v8::FunctionCallbackInfo<v8::Value> const&)
+     10    0.4%    0.2%  memcpy@@GLIBC_2.4
+      9    0.3%    0.2%  v8::internal::CallPrinter::VisitNoStackOverflowCheck(v8::internal::AstNode*)
+      8    0.3%    0.2%  std::ostream::sentry::sentry(std::ostream&)@@GLIBCXX_3.4
+      8    0.3%    0.2%  std::ostream& std::ostream::_M_insert<long>(long)@@GLIBCXX_3.4.9
+      7    0.3%    0.2%  node::builtins::BuiltinLoader::LoadJavaScriptSource()
+      6    0.2%    0.1%  node::wasi::WASI::PathFilestatSetTimes(v8::FunctionCallbackInfo<v8::Value> const&)
+      6    0.2%    0.1%  node::tracing::NodeTraceWriter::NodeTraceWriter(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+      6    0.2%    0.1%  node::http2::Http2Settings::MemoryInfo(node::MemoryTracker*) const
+      6    0.2%    0.1%  memcpy
+      6    0.2%    0.1%  __libc_malloc@@GLIBC_2.4
+      6    0.2%    0.1%  _IO_file_xsputn@@GLIBC_2.4
+      5    0.2%    0.1%  node::(anonymous namespace)::InitializeHttpParser(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>, void*)
+      5    0.2%    0.1%  memcmp
+      4    0.1%    0.1%  std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, long) const@@GLIBCXX_3.4
+      4    0.1%    0.1%  node::fs::Mkdtemp(v8::FunctionCallbackInfo<v8::Value> const&)
+      4    0.1%    0.1%  __lll_lock_wait
+      3    0.1%    0.1%  void node::Buffer::(anonymous namespace)::StringWrite<(node::encoding)3>(v8::FunctionCallbackInfo<v8::Value> const&)
+      3    0.1%    0.1%  v8::NewContext(v8::Isolate*, v8::ExtensionConfiguration*, v8::MaybeLocal<v8::ObjectTemplate>, v8::MaybeLocal<v8::Value>, unsigned int, v8::DeserializeInternalFieldsCallback, v8::MicrotaskQueue*)
+      3    0.1%    0.1%  non-virtual thunk to node::crypto::CryptoJob<node::crypto::HmacTraits>::AfterThreadPoolWork(int)
+      3    0.1%    0.1%  node::http2::Http2StreamListener::OnStreamRead(int, uv_buf_t const&)
+      3    0.1%    0.1%  node::DefineConstants(v8::Isolate*, v8::Local<v8::Object>)
+      3    0.1%    0.1%  node::(anonymous namespace)::DefineSignalConstants(v8::Local<v8::Object>)
+      3    0.1%    0.1%  napi_call_threadsafe_function
+      3    0.1%    0.1%  memset
+      3    0.1%    0.1%  __udivmoddi4@@GCC_3.0
+      3    0.1%    0.1%  __GI___pthread_rwlock_wrlock
+      3    0.1%    0.1%  __GI___pthread_rwlock_unlock
+      3    0.1%    0.1%  __GI___pthread_mutex_lock
+      2    0.1%    0.0%  v8::internal::CallPrinter::VisitCompoundAssignment(v8::internal::CompoundAssignment*)
+      2    0.1%    0.0%  v8::internal::CallPrinter::VisitClassLiteral(v8::internal::ClassLiteral*)
+      2    0.1%    0.0%  v8::String::NewFromOneByte(v8::Isolate*, unsigned char const*, v8::NewStringType, int)
+      2    0.1%    0.0%  v8::String::Concat(v8::Isolate*, v8::Local<v8::String>, v8::Local<v8::String>)
+      2    0.1%    0.0%  strlen
+      2    0.1%    0.0%  std::ostreambuf_iterator<char, std::char_traits<char> > std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long long>(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long long) const@@GLIBCXX_3.4
+      2    0.1%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int>(char const*, char const*&&, unsigned int&&)
+      2    0.1%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int, unsigned int&>(char const*, char const*&&, unsigned int&&, unsigned int&)
+      2    0.1%    0.0%  operator new(unsigned int)@@GLIBCXX_3.4
+      2    0.1%    0.0%  node::os::GetUserInfo(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.1%    0.0%  node::loader::ModuleWrap::New(v8::FunctionCallbackInfo<v8::Value> const&)
+      2    0.1%    0.0%  memmove
+      2    0.1%    0.0%  __udivsi3@@GCC_3.0
+      2    0.1%    0.0%  __aeabi_uidivmod@@GCC_3.5
+      1    0.0%    0.0%  void std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >::_M_assign_aux<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const*>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const*, std::forward_iterator_tag) [clone .constprop.768]
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitProperty(v8::internal::Property*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitObjectLiteral(v8::internal::ObjectLiteral*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitInitializeClassMembersStatement(v8::internal::InitializeClassMembersStatement*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitCountOperation(v8::internal::CountOperation*)
+      1    0.0%    0.0%  v8::internal::CallPrinter::VisitBlock(v8::internal::Block*)
+      1    0.0%    0.0%  v8::String::Utf8Length(v8::Isolate*) const
+      1    0.0%    0.0%  v8::String::NewFromTwoByte(v8::Isolate*, unsigned short const*, v8::NewStringType, int)
+      1    0.0%    0.0%  v8::Proxy::CheckCast(v8::Value*)
+      1    0.0%    0.0%  v8::HeapSpaceStatistics::HeapSpaceStatistics()
+      1    0.0%    0.0%  v8::HeapObjectStatistics::HeapObjectStatistics()
+      1    0.0%    0.0%  v8::Context::SetContinuationPreservedEmbedderData(v8::Local<v8::Value>)
+      1    0.0%    0.0%  std::ostream& std::ostream::_M_insert<unsigned long long>(unsigned long long)@@GLIBCXX_3.4.9
+      1    0.0%    0.0%  std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char, std::char_traits<char> >, std::ios_base&, char, unsigned long long) const@@GLIBCXX_3.4
+      1    0.0%    0.0%  std::basic_streambuf<char, std::char_traits<char> >::xsputn(char const*, int)@@GLIBCXX_3.4
+      1    0.0%    0.0%  std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned int) const@@GLIBCXX_3.4.18
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<unsigned int, unsigned int, char const*>(char const*, unsigned int&&, unsigned int&&, char const*&&)
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<unsigned int, unsigned int&>(char const*, unsigned int&&, unsigned int&)
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int, unsigned int, char const*>(char const*, char const*&&, unsigned int&&, unsigned int&&, char const*&&)
+      1    0.0%    0.0%  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > node::SPrintFImpl<char const*, unsigned int&>(char const*, char const*&&, unsigned int&)
+      1    0.0%    0.0%  std::_Rb_tree_decrement(std::_Rb_tree_node_base*)@@GLIBCXX_3.4
+      1    0.0%    0.0%  operator new[](unsigned int, std::nothrow_t const&)@@GLIBCXX_3.4
+      1    0.0%    0.0%  operator new[](unsigned int)@@GLIBCXX_3.4
+      1    0.0%    0.0%  operator delete(void*)@@GLIBCXX_3.4
+      1    0.0%    0.0%  non-virtual thunk to node::crypto::TLSWrap::OnStreamAlloc(unsigned int)
+      1    0.0%    0.0%  node::options_parser::OptionsParser<node::DebugOptions>::Implies(char const*, char const*)
+      1    0.0%    0.0%  node::inspector::InspectorIo::ThreadMain()
+      1    0.0%    0.0%  node::inspector::(anonymous namespace)::ChannelImpl::sendResponse(int, std::unique_ptr<v8_inspector::StringBuffer, std::default_delete<v8_inspector::StringBuffer> >)
+      1    0.0%    0.0%  node::http2::Http2Session::diagnostic_name[abi:cxx11]() const
+      1    0.0%    0.0%  node::crypto::CipherJob<node::crypto::RSACipherTraits>::DoThreadPoolWork()
+      1    0.0%    0.0%  node::binding::DLib::Close()
+      1    0.0%    0.0%  node::ThreadPoolWork::ScheduleWork()::{lambda(uv_work_s*, int)#2}::_FUN(uv_work_s*, int)
+      1    0.0%    0.0%  node::SplitString(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char, bool)
+      1    0.0%    0.0%  node::MakeLibuvRequestCallback<uv_udp_send_s, void (*)(uv_udp_send_s*, int)>::Wrapper(uv_udp_send_s*, int)
+      1    0.0%    0.0%  node::CallbackQueue<void, node::Environment*>::CallbackImpl<node::cares_wrap::QueryWrap<node::cares_wrap::TxtTraits>::QueueResponseCallback(int)::{lambda(node::Environment*)#1}>::Call(node::Environment*)
+      1    0.0%    0.0%  node::(anonymous namespace)::Parser::Proxy<int (node::(anonymous namespace)::Parser::*)(char const*, unsigned int), &node::(anonymous namespace)::Parser::on_url>::Raw(llhttp__internal_s*, char const*, unsigned int)
+      1    0.0%    0.0%  node::(anonymous namespace)::Parser::Proxy<int (node::(anonymous namespace)::Parser::*)(), &node::(anonymous namespace)::Parser::on_message_complete>::Raw(llhttp__internal_s*)
+      1    0.0%    0.0%  napi_remove_wrap
+      1    0.0%    0.0%  memchr@@GLIBC_2.4
+      1    0.0%    0.0%  fputc@@GLIBC_2.4
+      1    0.0%    0.0%  fflush@@GLIBC_2.4
+      1    0.0%    0.0%  cfree@GLIBC_2.4
+      1    0.0%    0.0%  ceil@@GLIBC_2.4
+      1    0.0%    0.0%  __pthread_mutex_unlock_usercnt
+      1    0.0%    0.0%  __divsi3@@GCC_3.0
+      1    0.0%    0.0%  _IO_file_write@@GLIBC_2.4
+      1    0.0%    0.0%  _IO_file_sync@@GLIBC_2.4
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   1372   32.8%  node::contextify::ContextifyContext::CompileFunction(v8::FunctionCallbackInfo<v8::Value> const&)
+   1239   90.3%    Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+    616   49.7%      Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     52    8.4%        Function: ~<anonymous> node:internal/webstreams/transformstream:1:1
+     52  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     52  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     49    8.0%        Function: ~<anonymous> node:http:1:1
+     49  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     49  100.0%            LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:264:25
+     36    5.8%        Function: ~<anonymous> node:tls:1:1
+     36  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     36  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     34    5.5%        Function: ~<anonymous> node:internal/modules/esm/fetch_module:1:1
+     34  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     34  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     32    5.2%        Function: ~<anonymous> node:internal/modules/esm/loader:1:1
+     32  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     32  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     26    4.2%        LazyCompile: ~initializeCJSLoader node:internal/process/pre_execution:542:29
+     26  100.0%          LazyCompile: ~setupUserModules node:internal/process/pre_execution:113:26
+     26  100.0%            LazyCompile: ~prepareExecution node:internal/process/pre_execution:52:26
+     26    4.2%        Function: ~<anonymous> node:internal/fs/promises:1:1
+     26  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     26  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     26    4.2%        Function: ~<anonymous> node:_http_client:1:1
+     26  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     26  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     23    3.7%        Function: ~<anonymous> node:internal/child_process:1:1
+     23  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     23  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     22    3.6%        Function: ~<anonymous> node:internal/bootstrap/browser:1:1
+     21    3.4%        Function: ~<anonymous> node:internal/webstreams/readablestream:1:1
+     21  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     21  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     21    3.4%        Function: ~<anonymous> node:internal/process/esm_loader:1:1
+     21  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     21  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     19    3.1%        Function: ~<anonymous> node:child_process:1:1
+     19  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     19  100.0%            LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:264:25
+     17    2.8%        Function: ~<anonymous> node:internal/modules/esm/load:1:1
+     17  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     17  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     15    2.4%        LazyCompile: ~lazyWebCrypto node:crypto:125:23
+     15  100.0%          LazyCompile: ~get node:crypto:369:8
+     15  100.0%            /usr/bin/node
+     15    2.4%        Function: ~<anonymous> node:perf_hooks:1:1
+     15  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     15  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     13    2.1%        Function: ~<anonymous> node:internal/webstreams/compression:1:1
+     13  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     13  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     11    1.8%        Function: ~<anonymous> node:_http_common:1:1
+     11  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     11  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     10    1.6%        Function: ~<anonymous> node:internal/readline/interface:1:1
+     10  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     10  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+     10    1.6%        Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      9    1.5%        LazyCompile: ~lazyLoadStreams node:fs:2935:25
+      9  100.0%          LazyCompile: ~get ReadStream node:fs:3080:17
+      9  100.0%            /usr/bin/node
+      9    1.5%        Function: ~<anonymous> node:internal/perf/resource_timing:1:1
+      9  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      9  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      9    1.5%        Function: ~<anonymous> node:internal/modules/esm/module_map:1:1
+      9  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      9  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      8    1.3%        Function: ~<anonymous> node:internal/source_map/source_map_cache:1:1
+      8  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      8  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      8    1.3%        Function: ~<anonymous> node:https:1:1
+      8  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      8  100.0%            LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:264:25
+      7    1.1%        LazyCompile: ~prepareExecution node:internal/process/pre_execution:52:26
+      7  100.0%          LazyCompile: ~prepareMainThreadExecution node:internal/process/pre_execution:36:36
+      7  100.0%            Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      7    1.1%        Function: ~<anonymous> node:internal/modules/esm/get_format:1:1
+      7  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      7  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+    565   45.6%      LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+    109   19.3%        Function: ~<anonymous> node:internal/bootstrap/node:1:1
+     58   10.3%        Function: ~<anonymous> node:crypto:1:1
+     58  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     58  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     54    9.6%        Function: ~<anonymous> node:fs:1:1
+     54  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     54  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     36    6.4%        Function: ~<anonymous> node:internal/streams/duplex:1:1
+     36  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     36  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     28    5.0%        Function: ~<anonymous> node:buffer:1:1
+     28  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     28  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     23    4.1%        LazyCompile: ~setupBuffer node:internal/bootstrap/node:433:21
+     23  100.0%          Function: ~<anonymous> node:internal/bootstrap/node:1:1
+     23    4.1%        Function: ~<anonymous> node:internal/abort_controller:1:1
+     23  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     23  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     22    3.9%        Function: ~<anonymous> node:internal/process/execution:1:1
+     22  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     22  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     17    3.0%        LazyCompile: ~setupProcessObject node:internal/bootstrap/node:392:28
+     17  100.0%          Function: ~<anonymous> node:internal/bootstrap/node:1:1
+     16    2.8%        Function: ~<anonymous> node:internal/streams/readable:1:1
+     16  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     16  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     15    2.7%        Function: ~<anonymous> node:util:1:1
+     15  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     15  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     15    2.7%        Function: ~<anonymous> node:internal/streams/operators:1:1
+     15  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     15  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     15    2.7%        Function: ~<anonymous> node:internal/process/task_queues:1:1
+     15  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     15  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     15    2.7%        Function: ~<anonymous> node:internal/blob:1:1
+     15  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     15  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     14    2.5%        Function: ~<anonymous> node:stream:1:1
+     14  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     14  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     13    2.3%        Function: ~<anonymous> node:internal/crypto/hkdf:1:1
+     13  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     13  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     12    2.1%        Function: ~<anonymous> node:internal/console/global:1:1
+     12  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     12  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     11    1.9%        Function: ~<anonymous> node:internal/url:1:1
+     11  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     11  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      9    1.6%        Function: ~<anonymous> node:internal/event_target:1:1
+      9  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      9  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      8    1.4%        Function: ~<anonymous> node:internal/streams/pipeline:1:1
+      8  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      8  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      7    1.2%        Function: ~<anonymous> node:internal/streams/compose:1:1
+      7  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      7  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      7    1.2%        Function: ~<anonymous> node:internal/crypto/pbkdf2:1:1
+      7  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      7  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      6    1.1%        Function: ~<anonymous> node:v8:1:1
+      6  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      6  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     58    4.7%      LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:264:25
+     58  100.0%        Function: ^loadBuiltinModule node:internal/modules/cjs/helpers:51:27
+     31   53.4%          Function: ^Module._load node:internal/modules/cjs/loader:886:24
+     31  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:1133:36
+     27   46.6%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+     15   55.6%            Function: ^Module.require node:internal/modules/cjs/loader:1133:36
+     12   44.4%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:1133:36
+    133    9.7%    LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:319:27
+    133  100.0%      LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     58   43.6%        Function: ~<anonymous> node:internal/timers:1:1
+     58  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     58  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     37   27.8%        LazyCompile: ~setupPrepareStackTrace node:internal/bootstrap/node:373:32
+     37  100.0%          Function: ~<anonymous> node:internal/bootstrap/node:1:1
+     20   15.0%        Function: ~<anonymous> node:internal/promise_hooks:1:1
+     20  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:319:27
+     20  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+     11    8.3%        Function: ~<anonymous> node:internal/bootstrap/node:1:1
+      3    2.3%        Function: ~<anonymous> node:internal/validators:1:1
+      3  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      3  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      3    2.3%        Function: ~<anonymous> node:internal/async_hooks:1:1
+      3  100.0%          LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      3  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+
+   1283   30.7%  /usr/bin/node
+     88    6.9%    /usr/bin/node
+     10   11.4%      LazyCompile: ~resolvePackageTargetString node:internal/modules/esm/resolve:412:36
+     10  100.0%        LazyCompile: ~resolvePackageTarget node:internal/modules/esm/resolve:519:30
+     10  100.0%          LazyCompile: ~resolvePackageTarget node:internal/modules/esm/resolve:519:30
+     10  100.0%            LazyCompile: ~packageExportsResolve node:internal/modules/esm/resolve:625:31
+      5    5.7%      LazyCompile: ~isIPv6 node:internal/net:38:16
+      5  100.0%        LazyCompile: ~isIP node:internal/net:45:14
+      3   60.0%          LazyCompile: ~lookupAndConnect node:net:1209:26
+      3  100.0%            LazyCompile: ~Socket.connect node:net:1141:36
+      2   40.0%          LazyCompile: ~calculateServerName node:_http_agent:346:29
+      2  100.0%            LazyCompile: ~addRequest node:_http_agent:239:49
+      5    5.7%      Function: ^getOwn node:internal/bootstrap/loaders:188:16
+      5  100.0%        Function: ^syncExports node:internal/bootstrap/loaders:307:14
+      3   60.0%          LazyCompile: ~<anonymous> node:internal/bootstrap/loaders:293:15
+      3  100.0%            std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+      2   40.0%          Function: ^<anonymous> node:internal/bootstrap/loaders:293:15
+      2  100.0%            std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+      3    3.4%      Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      3    3.4%      Function: ^readPackage node:internal/modules/cjs/loader:362:21
+      3  100.0%        Function: ^readPackageScope node:internal/modules/cjs/loader:404:26
+      2   66.7%          LazyCompile: ~trySelf node:internal/modules/cjs/loader:524:17
+      2  100.0%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1   33.3%          Function: ^trySelf node:internal/modules/cjs/loader:524:17
+      1  100.0%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      3    3.4%      /usr/bin/node
+      2   66.7%        Function: ^readPackage node:internal/modules/cjs/loader:362:21
+      1   50.0%          Function: ^resolveExports node:internal/modules/cjs/loader:555:24
+      1  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:582:28
+      1   50.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:404:26
+      1  100.0%            Function: ^trySelf node:internal/modules/cjs/loader:524:17
+      1   33.3%        Function: ^realpathSync node:fs:2502:22
+      1  100.0%          Function: ^toRealPath node:internal/modules/cjs/loader:476:20
+      1  100.0%            LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:582:28
+      2    2.3%      LazyCompile: ~processCiphers node:internal/tls/secure-context:95:24
+      2  100.0%        LazyCompile: ~configSecureContext node:internal/tls/secure-context:124:29
+      2  100.0%          LazyCompile: ~createSecureContext node:_tls_common:99:29
+      2  100.0%            LazyCompile: ~connect node:_tls_wrap:1607:35
+      2    2.3%      LazyCompile: ~finalizeEsmResolution node:internal/modules/cjs/loader:1081:31
+      2  100.0%        LazyCompile: ~resolveExports node:internal/modules/cjs/loader:555:24
+      2  100.0%          LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:582:28
+      2  100.0%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      2    2.3%      LazyCompile: ~deprecate node:internal/util:112:19
+      1   50.0%        Function: ~<anonymous> node:timers:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      1   50.0%        Function: ~<anonymous> node:internal/process/promises:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%            LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      2    2.3%      Function: ~<anonymous> node:buffer:1:1
+      2  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      2  100.0%          LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      2  100.0%            LazyCompile: ~setupBuffer node:internal/bootstrap/node:433:21
+      2    2.3%      Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:1:1
+      2  100.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      2  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      2  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+      1    1.1%      LazyCompile: ~unfqdn node:tls:160:16
+      1  100.0%        LazyCompile: ~splitHost node:tls:170:19
+      1  100.0%          LazyCompile: ~checkServerIdentity node:tls:280:59
+      1  100.0%            LazyCompile: ~onConnectSecure node:_tls_wrap:1526:25
+      1    1.1%      LazyCompile: ~translatePeerCertificate node:_tls_common:125:34
+      1  100.0%        LazyCompile: ~translatePeerCertificate node:_tls_common:125:34
+      1  100.0%          LazyCompile: ~translatePeerCertificate node:_tls_common:125:34
+      1  100.0%            LazyCompile: ~TLSSocket.getPeerCertificate node:_tls_wrap:999:50
+      1    1.1%      LazyCompile: ~stripVTControlCharacters node:internal/util/inspect:2386:34
+      1  100.0%        LazyCompile: ~getStringWidth node:internal/util/inspect:2299:43
+      1  100.0%          LazyCompile: ~groupArrayElements node:internal/util/inspect:1429:28
+      1  100.0%            LazyCompile: ~reduceToSingleString node:internal/util/inspect:2007:30
+      1    1.1%      LazyCompile: ~request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:220:12
+      1  100.0%        LazyCompile: ~doWrite /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:231:12
+      1  100.0%          LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:176:56
+      1  100.0%            LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-parser/build/cjs/index.js:16:55
+      1    1.1%      LazyCompile: ~removeColors node:internal/util:92:22
+      1  100.0%        LazyCompile: ~isBelowBreakLength node:internal/util/inspect:1983:28
+      1  100.0%          LazyCompile: ~reduceToSingleString node:internal/util/inspect:2007:30
+      1  100.0%            LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1    1.1%      LazyCompile: ~pick /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/util.js:5:14
+      1  100.0%        LazyCompile: ~create /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:279:11
+      1  100.0%          LazyCompile: ~Request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:264:16
+      1  100.0%            LazyCompile: ~request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:220:12
+      1    1.1%      LazyCompile: ~onDrain /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:396:12
+      1  100.0%        Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%          LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:121:62
+      1  100.0%            Function: ^processTicksAndRejections node:internal/process/task_queues:67:35
+      1    1.1%      LazyCompile: ~onData /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:117:11
+      1  100.0%        LazyCompile: ~Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%          LazyCompile: ~onLoad /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:381:11
+      1  100.0%            LazyCompile: ~xhr.onreadystatechange /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:315:38
+      1    1.1%      LazyCompile: ~makeSafe node:internal/per_context/primordials:366:18
+      1  100.0%        Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      1    1.1%      LazyCompile: ~getOwn node:internal/bootstrap/loaders:188:16
+      1  100.0%        LazyCompile: ~syncExports node:internal/bootstrap/loaders:307:14
+      1  100.0%          LazyCompile: ~<anonymous> node:internal/bootstrap/loaders:293:15
+      1  100.0%            std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+      1    1.1%      LazyCompile: ~getFileName /home/captainhandsome/project-tiara-device-client-v2/node_modules/bindings/bindings.js:145:43
+      1  100.0%        LazyCompile: ~bindings /home/captainhandsome/project-tiara-device-client-v2/node_modules/bindings/bindings.js:67:18
+      1  100.0%          Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/rpio/lib/rpio.js:1:1
+      1  100.0%            Function: ^Module._compile node:internal/modules/cjs/loader:1208:37
+      1    1.1%      LazyCompile: ~getColorDepth node:internal/tty:106:23
+      1  100.0%        LazyCompile: ~value node:internal/console/constructor:315:20
+      1  100.0%          LazyCompile: ~value node:internal/console/constructor:337:20
+      1  100.0%            LazyCompile: ~log node:internal/console/constructor:376:6
+      1    1.1%      LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1  100.0%        Function: ^formatValue node:internal/util/inspect:766:21
+      1  100.0%          LazyCompile: ~inspect node:internal/util/inspect:310:17
+      1  100.0%            Function: ^formatWithOptionsInternal node:internal/util/inspect:2154:35
+      1    1.1%      LazyCompile: ~formatProperty node:internal/util/inspect:1911:24
+      1  100.0%        LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1  100.0%          LazyCompile: ~formatValue node:internal/util/inspect:766:21
+      1  100.0%            LazyCompile: ~formatProperty node:internal/util/inspect:1911:24
+      1    1.1%      LazyCompile: ~format /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/extension.js:179:16
+      1  100.0%        LazyCompile: ~initAsClient /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:637:22
+      1  100.0%          LazyCompile: ~WebSocket /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:52:14
+      1  100.0%            LazyCompile: ~doOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:33:11
+      1    1.1%      LazyCompile: ~findToggle /home/captainhandsome/project-tiara-device-client-v2/dist/PersistedOutput.js:28:20
+      1  100.0%        LazyCompile: ~createOutput /home/captainhandsome/project-tiara-device-client-v2/dist/PersistedOutput.js:36:22
+      1  100.0%          LazyCompile: ~SimpleStateOutput /home/captainhandsome/project-tiara-device-client-v2/dist/SimpleStateOutput.js:8:27
+      1  100.0%            Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/Output/BasicOutputs.js:1:1
+      1    1.1%      LazyCompile: ~emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/js-event-bus/src/index.js:150:21
+      1  100.0%        LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:88:44
+      1  100.0%          Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%            LazyCompile: ~emitEvent /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:512:14
+      1    1.1%      LazyCompile: ~doOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:33:11
+      1  100.0%        LazyCompile: ~open /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:51:9
+      1  100.0%          LazyCompile: ~probe /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:204:10
+      1  100.0%            LazyCompile: ~onOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:301:11
+      1    1.1%      LazyCompile: ~copyProps node:internal/per_context/primordials:352:19
+      1  100.0%        LazyCompile: ~makeSafe node:internal/per_context/primordials:366:18
+      1  100.0%          Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      1    1.1%      LazyCompile: ~checkInvalidHeaderChar node:_http_common:223:32
+      1  100.0%        LazyCompile: ~<anonymous> node:_http_outgoing:619:45
+      1  100.0%          LazyCompile: ~setHeader node:_http_outgoing:643:57
+      1  100.0%            LazyCompile: ~ClientRequest node:_http_client:135:23
+      1    1.1%      LazyCompile: ~check node:tls:177:15
+      1  100.0%        LazyCompile: ~wildcard node:tls:313:22
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: ~checkServerIdentity node:tls:280:59
+      1    1.1%      LazyCompile: ~bindings /home/captainhandsome/project-tiara-device-client-v2/node_modules/bindings/bindings.js:67:18
+      1  100.0%        Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/rpio/lib/rpio.js:1:1
+      1  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1208:37
+      1  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1    1.1%      LazyCompile: ~bindDefaultResolver node:internal/dns/utils:250:29
+      1  100.0%        Function: ~<anonymous> node:dns:1:1
+      1  100.0%          Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%            Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      1    1.1%      LazyCompile: ~XMLHttpRequest.dispatchEvent /home/captainhandsome/project-tiara-device-client-v2/node_modules/xmlhttprequest-ssl/lib/XMLHttpRequest.js:625:32
+      1  100.0%        LazyCompile: ~XMLHttpRequest.send /home/captainhandsome/project-tiara-device-client-v2/node_modules/xmlhttprequest-ssl/lib/XMLHttpRequest.js:284:23
+      1  100.0%          LazyCompile: ~create /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:279:11
+      1  100.0%            LazyCompile: ~Request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:264:16
+      1    1.1%      LazyCompile: ~XMLHttpRequest.abort /home/captainhandsome/project-tiara-device-client-v2/node_modules/xmlhttprequest-ssl/lib/XMLHttpRequest.js:578:24
+      1  100.0%        LazyCompile: ~XMLHttpRequest.open /home/captainhandsome/project-tiara-device-client-v2/node_modules/xmlhttprequest-ssl/lib/XMLHttpRequest.js:173:23
+      1  100.0%          LazyCompile: ~create /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:279:11
+      1  100.0%            LazyCompile: ~Request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:264:16
+      1    1.1%      LazyCompile: ~Socket node:net:338:16
+      1  100.0%        LazyCompile: ~WriteStream node:tty:84:21
+      1  100.0%          LazyCompile: ~createWritableStdioStream node:internal/bootstrap/switches/is_main_thread:45:35
+      1  100.0%            LazyCompile: ~getStderr node:internal/bootstrap/switches/is_main_thread:168:19
+      1    1.1%      LazyCompile: ~FastBuffer node:internal/buffer:960:14
+      1  100.0%        LazyCompile: ~allocate node:buffer:456:18
+      1  100.0%          LazyCompile: ~allocUnsafe node:buffer:431:42
+      1  100.0%            LazyCompile: ~tryCreateBuffer node:fs:430:25
+      1    1.1%      LazyCompile: ~EventBus.registerListener /home/captainhandsome/project-tiara-device-client-v2/node_modules/js-event-bus/src/index.js:14:37
+      1  100.0%        LazyCompile: ~on /home/captainhandsome/project-tiara-device-client-v2/node_modules/js-event-bus/src/index.js:72:19
+      1  100.0%          Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:1:1
+      1  100.0%            LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1    1.1%      LazyCompile: ~Emitter.on.Emitter.addEventListener /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:43:46
+      1  100.0%        LazyCompile: ~on /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/on.js:4:12
+      1  100.0%          LazyCompile: ~subEvents /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:129:14
+      1  100.0%            LazyCompile: ~connect /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:170:12
+      1    1.1%      LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:88:44
+      1  100.0%        Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%          LazyCompile: ~emitEvent /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:512:14
+      1  100.0%            LazyCompile: ~onevent /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:498:12
+      1    1.1%      Function: ~<anonymous> node:zlib:1:1
+      1  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          LazyCompile: ~compileForPublicLoader node:internal/bootstrap/loaders:264:25
+      1  100.0%            Function: ^loadBuiltinModule node:internal/modules/cjs/helpers:51:27
+      1    1.1%      Function: ~<anonymous> node:querystring:1:1
+      1  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%            Function: ~<anonymous> node:internal/url:1:1
+      1    1.1%      Function: ~<anonymous> node:internal/util/inspect:1:1
+      1  100.0%        LazyCompile: ~compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%            Function: ~<anonymous> node:internal/timers:1:1
+      1    1.1%      Function: ~<anonymous> node:internal/net:1:1
+      1  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%            Function: ~<anonymous> node:internal/dns/utils:1:1
+      1    1.1%      Function: ~<anonymous> node:_http_server:1:1
+      1  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%            Function: ~<anonymous> node:http:1:1
+      1    1.1%      Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/node_modules/debug/src/index.js:1:1
+      1  100.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1  100.0%            LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1    1.1%      Function: ^stat node:internal/modules/cjs/loader:180:14
+      1  100.0%        Function: ^tryFile node:internal/modules/cjs/loader:467:17
+      1  100.0%          Function: ^tryExtensions node:internal/modules/cjs/loader:483:23
+      1  100.0%            Function: ^Module._findPath node:internal/modules/cjs/loader:582:28
+      1    1.1%      Function: ^resolve node:path:1091:10
+      1  100.0%        Function: ^readPackage node:internal/modules/cjs/loader:362:21
+      1  100.0%          Function: ^readPackageScope node:internal/modules/cjs/loader:404:26
+      1  100.0%            Function: ^trySelf node:internal/modules/cjs/loader:524:17
+      1    1.1%      Function: ^removeColors node:internal/util:92:22
+      1  100.0%        Function: ^isBelowBreakLength node:internal/util/inspect:1983:28
+      1  100.0%          Function: ^reduceToSingleString node:internal/util/inspect:2007:30
+      1  100.0%            LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1    1.1%      Function: ^realpathSync node:fs:2502:22
+      1  100.0%        Function: ^toRealPath node:internal/modules/cjs/loader:476:20
+      1  100.0%          Function: ^tryFile node:internal/modules/cjs/loader:467:17
+      1  100.0%            LazyCompile: ~tryPackage node:internal/modules/cjs/loader:421:20
+      1    1.1%      Function: ^readPackageScope node:internal/modules/cjs/loader:404:26
+      1  100.0%        LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1  100.0%          LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1  100.0%            LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1    1.1%      Function: ^formatProperty node:internal/util/inspect:1911:24
+      1  100.0%        LazyCompile: ~formatArray node:internal/util/inspect:1733:21
+      1  100.0%          LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1  100.0%            LazyCompile: ~formatValue node:internal/util/inspect:766:21
+      1    1.1%      Function: ^copyPropsRenamed node:internal/per_context/primordials:75:26
+      1  100.0%        LazyCompile: ~<anonymous> node:internal/per_context/primordials:223:11
+      1  100.0%          /usr/bin/node
+      1  100.0%            Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      1    1.1%      Function: ^canBeRequiredByUsers node:internal/bootstrap/loaders:248:30
+      1  100.0%        LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:1133:36
+      1    1.1%      Function: ^Module._nodeModulePaths node:internal/modules/cjs/loader:747:37
+      1  100.0%        LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:1133:36
+      1    1.1%      Function: ^Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%        Function: ^Module.require node:internal/modules/cjs/loader:1133:36
+      1  100.0%          Function: ^require node:internal/modules/cjs/helpers:108:31
+      1  100.0%            Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:1:1
+      1    1.1%      Function: ^Module._findPath node:internal/modules/cjs/loader:582:28
+      1  100.0%        Function: ^Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:1133:36
+      1    1.1%      Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%        LazyCompile: ~add /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-parser/build/cjs/index.js:120:8
+      1  100.0%          LazyCompile: ~ondata /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:224:11
+      1  100.0%            Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1    1.1%      Function: ^<anonymous> node:internal/modules/cjs/loader:1:1
+      1  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%            LazyCompile: ~initializeCJSLoader node:internal/process/pre_execution:542:29
+     21    1.6%    Function: ^resolve node:path:1091:10
+     15   71.4%      Function: ^readPackage node:internal/modules/cjs/loader:362:21
+     15  100.0%        Function: ^readPackageScope node:internal/modules/cjs/loader:404:26
+      6   40.0%          Function: ^trySelf node:internal/modules/cjs/loader:524:17
+      5   83.3%            Function: ^Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1   16.7%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      4   26.7%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      2   50.0%            LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      2   50.0%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+      3   20.0%          LazyCompile: ~trySelf node:internal/modules/cjs/loader:524:17
+      3  100.0%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      2   13.3%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      2  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+      3   14.3%      Function: ^Module._nodeModulePaths node:internal/modules/cjs/loader:747:37
+      2   66.7%        LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      2  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      2  100.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:1133:36
+      1   33.3%        Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+      1  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:1133:36
+      1    4.8%      LazyCompile: ~readPackage node:internal/modules/cjs/loader:362:21
+      1  100.0%        LazyCompile: ~readPackageScope node:internal/modules/cjs/loader:404:26
+      1  100.0%          LazyCompile: ~trySelf node:internal/modules/cjs/loader:524:17
+      1  100.0%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1    4.8%      LazyCompile: ~pathToFileURL node:internal/url:1261:23
+      1  100.0%        LazyCompile: ~resolveExports node:internal/modules/cjs/loader:555:24
+      1  100.0%          LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:582:28
+      1  100.0%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1    4.8%      Function: ^Module._findPath node:internal/modules/cjs/loader:582:28
+      1  100.0%        LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1  100.0%          Function: ^Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%            Function: ^Module.require node:internal/modules/cjs/loader:1133:36
+     13    1.0%    Function: ^copyPrototype node:internal/per_context/primordials:121:23
+      9   69.2%      LazyCompile: ~<anonymous> node:internal/per_context/primordials:223:11
+      9  100.0%        /usr/bin/node
+      9  100.0%          Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      3   23.1%      LazyCompile: ~<anonymous> node:internal/per_context/primordials:255:11
+      3  100.0%        /usr/bin/node
+      3  100.0%          Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      1    7.7%      LazyCompile: ~<anonymous> node:internal/per_context/primordials:236:11
+      1  100.0%        /usr/bin/node
+      1  100.0%          Function: ~<anonymous> node:internal/per_context/primordials:1:1
+
+    284    6.8%  node::errors::PerIsolateMessageListener(v8::Local<v8::Message>, v8::Local<v8::Value>)
+    244   85.9%    Function: ^internalCompileFunction node:internal/vm:31:33
+    200   82.0%      Function: ^wrapSafe node:internal/modules/cjs/loader:1152:18
+    106   53.0%        Function: ^Module._compile node:internal/modules/cjs/loader:1208:37
+    103   97.2%          Function: ^Module._extensions..js node:internal/modules/cjs/loader:1263:37
+    103  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+      3    2.8%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      3  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+     94   47.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+     94  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+     94  100.0%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+     44   18.0%      LazyCompile: ~wrapSafe node:internal/modules/cjs/loader:1152:18
+     44  100.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+     44  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+     30   68.2%            LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+     14   31.8%            Function: ^Module.load node:internal/modules/cjs/loader:1105:33
+     40   14.1%    LazyCompile: ~internalCompileFunction node:internal/vm:31:33
+     40  100.0%      LazyCompile: ~wrapSafe node:internal/modules/cjs/loader:1152:18
+     40  100.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+     40  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+     40  100.0%            LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+
+    273    6.5%  node::crypto::DeriveBitsJob<node::crypto::HmacTraits>::MemoryInfo(node::MemoryTracker*) const
+    273  100.0%    LazyCompile: ~configSecureContext node:internal/tls/secure-context:124:29
+    273  100.0%      LazyCompile: ~createSecureContext node:_tls_common:99:29
+    273  100.0%        LazyCompile: ~connect node:_tls_wrap:1607:35
+    273  100.0%          LazyCompile: ~createConnection node:https:118:26
+    273  100.0%            LazyCompile: ~createSocket node:_http_agent:310:53
+
+    170    4.1%  __write@@GLIBC_2.4
+     14    8.2%    /usr/bin/node
+      2   14.3%      Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      1    7.1%      LazyCompile: ~supportsColor /home/captainhandsome/project-tiara-device-client-v2/node_modules/supports-color/index.js:48:23
+      1  100.0%        LazyCompile: ~getSupportLevel /home/captainhandsome/project-tiara-device-client-v2/node_modules/supports-color/index.js:139:25
+      1  100.0%          Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/supports-color/index.js:1:1
+      1  100.0%            LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1    7.1%      LazyCompile: ~stripVTControlCharacters node:internal/util/inspect:2386:34
+      1  100.0%        LazyCompile: ~getStringWidth node:internal/util/inspect:2299:43
+      1  100.0%          LazyCompile: ~groupArrayElements node:internal/util/inspect:1429:28
+      1  100.0%            LazyCompile: ~reduceToSingleString node:internal/util/inspect:2007:30
+      1    7.1%      LazyCompile: ~queryKey /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/contrib/parseuri.js:57:18
+      1  100.0%        LazyCompile: ~parse /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/contrib/parseuri.js:27:15
+      1  100.0%          LazyCompile: ~url /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/url.js:19:13
+      1  100.0%            LazyCompile: ~lookup /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/index.js:18:16
+      1    7.1%      LazyCompile: ~pathToFileURL node:internal/url:1261:23
+      1  100.0%        LazyCompile: ~resolveExports node:internal/modules/cjs/loader:555:24
+      1  100.0%          LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:582:28
+      1  100.0%            LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1    7.1%      LazyCompile: ~getOwn node:internal/bootstrap/loaders:188:16
+      1  100.0%        LazyCompile: ~syncExports node:internal/bootstrap/loaders:307:14
+      1  100.0%          LazyCompile: ~<anonymous> node:internal/bootstrap/loaders:293:15
+      1  100.0%            std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+      1    7.1%      LazyCompile: ~formatProperty node:internal/util/inspect:1911:24
+      1  100.0%        LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1  100.0%          LazyCompile: ~formatValue node:internal/util/inspect:766:21
+      1  100.0%            LazyCompile: ~formatProperty node:internal/util/inspect:1911:24
+      1    7.1%      LazyCompile: ~cleanup /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:304:12
+      1  100.0%        LazyCompile: ~onopen /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:200:11
+      1  100.0%          LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:143:68
+      1  100.0%            LazyCompile: ~Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1    7.1%      LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/extension.js:181:10
+      1  100.0%        /usr/bin/node
+      1  100.0%          LazyCompile: ~format /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/extension.js:179:16
+      1  100.0%            LazyCompile: ~initAsClient /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:637:22
+      1    7.1%      LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/js-event-bus/src/index.js:174:35
+      1  100.0%        /usr/bin/node
+      1  100.0%          LazyCompile: ~emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/js-event-bus/src/index.js:150:21
+      1  100.0%            LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:88:44
+      1    7.1%      Function: ~<anonymous> node:_tls_wrap:1:1
+      1  100.0%        Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%          Function: ^requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%            Function: ~<anonymous> node:tls:1:1
+      1    7.1%      Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/PTClient.js:1:1
+      1  100.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1  100.0%            LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1    7.1%      Function: ^getOwn node:internal/bootstrap/loaders:188:16
+      1  100.0%        Function: ^syncExports node:internal/bootstrap/loaders:307:14
+      1  100.0%          LazyCompile: ~<anonymous> node:internal/bootstrap/loaders:293:15
+      1  100.0%            std::_Function_handler<bool (node::binding::DLib*), node::binding::DLOpen(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(node::binding::DLib*)#1}>::_M_invoke(std::_Any_data const&, node::binding::DLib*&&)
+      4    2.4%    Function: ^emit node:events:460:44
+      2   50.0%      LazyCompile: ~<anonymous> node:net:320:24
+      2  100.0%        LazyCompile: ~done node:_tls_wrap:579:16
+      1   25.0%      LazyCompile: ~socketOnData node:_http_client:535:22
+      1  100.0%        Function: ^emit node:events:460:44
+      1  100.0%          LazyCompile: ~addChunk node:internal/streams/readable:312:18
+      1  100.0%            LazyCompile: ~readableAddChunk node:internal/streams/readable:242:26
+      1   25.0%      LazyCompile: ~receiverOnMessage /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:1177:27
+      1  100.0%        Function: ^emit node:events:460:44
+      1  100.0%          LazyCompile: ~dataMessage /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:492:14
+      1  100.0%            LazyCompile: ~getData /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:410:10
+      3    1.8%    LazyCompile: ~encode /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-parser/build/cjs/index.js:43:11
+      2   66.7%      Function: ^_packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:292:12
+      2  100.0%        Function: ^packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:395:11
+      2  100.0%          Function: ^<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:532:25
+      2  100.0%            Function: ^<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/OutputToggleBase.js:20:45
+      1   33.3%      LazyCompile: ~_packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:292:12
+      1  100.0%        LazyCompile: ~packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:395:11
+      1  100.0%          LazyCompile: ~_sendConnectPacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:421:23
+      1  100.0%            LazyCompile: ~onopen /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:404:11
+      3    1.8%    LazyCompile: ~_addListener node:events:541:22
+      2   66.7%      LazyCompile: ~addListener node:events:604:58
+      2  100.0%        Function: ~<anonymous> node:internal/bootstrap/switches/is_main_thread:1:1
+      1   33.3%      Function: ^addListener node:events:604:58
+      1  100.0%        LazyCompile: ~Readable.on node:internal/streams/readable:886:33
+      1  100.0%          LazyCompile: ~installListeners node:_http_agent:374:26
+      1  100.0%            LazyCompile: ~<anonymous> node:_http_agent:324:25
+      3    1.8%    Function: ~<anonymous> node:internal/bootstrap/node:1:1
+      2    1.2%    LazyCompile: ~readFileSync node:fs:466:22
+      2  100.0%      LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      2  100.0%        LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      2  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1   50.0%            LazyCompile: ~executeUserEntryPoint node:internal/modules/run_main:74:31
+      1   50.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:1133:36
+      2    1.2%    LazyCompile: ~prepareExecution node:internal/process/pre_execution:52:26
+      2  100.0%      LazyCompile: ~prepareMainThreadExecution node:internal/process/pre_execution:36:36
+      2  100.0%        Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      2    1.2%    LazyCompile: ~parse /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/contrib/parseuri.js:27:15
+      2  100.0%      LazyCompile: ~url /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/url.js:19:13
+      2  100.0%        LazyCompile: ~lookup /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/index.js:18:16
+      2  100.0%          Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:1:1
+      2  100.0%            LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      2    1.2%    LazyCompile: ~onData /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:96:11
+      2  100.0%      LazyCompile: ~ws.onmessage /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:77:29
+      2  100.0%        LazyCompile: ~callListener /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/event-target.js:286:22
+      2  100.0%          LazyCompile: ~onMessage /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/event-target.js:203:35
+      2  100.0%            Function: ^emit node:events:460:44
+      2    1.2%    LazyCompile: ~nextTick node:internal/process/task_queues:103:18
+      2  100.0%      LazyCompile: ~onwrite node:internal/streams/writable:428:17
+      2  100.0%        LazyCompile: ~afterWriteDispatched node:internal/stream_base_commons:155:30
+      2  100.0%          LazyCompile: ~writeGeneric node:internal/stream_base_commons:147:22
+      2  100.0%            LazyCompile: ~Socket._writeGeneric node:net:899:42
+      2    1.2%    LazyCompile: ~join node:path:1166:7
+      2  100.0%      LazyCompile: ~bindings /home/captainhandsome/project-tiara-device-client-v2/node_modules/bindings/bindings.js:67:18
+      2  100.0%        Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/rpio/lib/rpio.js:1:1
+      2  100.0%          Function: ^Module._compile node:internal/modules/cjs/loader:1208:37
+      2  100.0%            Function: ^Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      2    1.2%    LazyCompile: ~initAsClient /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:637:22
+      2  100.0%      LazyCompile: ~WebSocket /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:52:14
+      2  100.0%        LazyCompile: ~doOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:33:11
+      2  100.0%          LazyCompile: ~open /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:51:9
+      2  100.0%            LazyCompile: ~probe /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:204:10
+      2    1.2%    LazyCompile: ~dataMessage /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:492:14
+      2  100.0%      LazyCompile: ~getData /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:410:10
+      2  100.0%        LazyCompile: ~startLoop /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:129:12
+      2  100.0%          LazyCompile: ~_write /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:78:9
+      2  100.0%            Function: ^writeOrBuffer node:internal/streams/writable:368:23
+      2    1.2%    LazyCompile: ~connect node:_tls_wrap:1607:35
+      2  100.0%      LazyCompile: ~createConnection node:https:118:26
+      2  100.0%        LazyCompile: ~createSocket node:_http_agent:310:53
+      2  100.0%          LazyCompile: ~addRequest node:_http_agent:239:49
+      2  100.0%            LazyCompile: ~ClientRequest node:_http_client:135:23
+      2    1.2%    LazyCompile: ~Socket._write node:net:941:35
+      2  100.0%      LazyCompile: ~writeOrBuffer node:internal/streams/writable:368:23
+      2  100.0%        LazyCompile: ~_write node:internal/streams/writable:286:16
+      2  100.0%          LazyCompile: ~Writable.write node:internal/streams/writable:336:36
+      2  100.0%            LazyCompile: ~value node:internal/console/constructor:272:20
+      2    1.2%    LazyCompile: ~Readable node:internal/streams/readable:186:18
+      2  100.0%      LazyCompile: ~Duplex node:internal/streams/duplex:54:16
+      2  100.0%        LazyCompile: ~Socket node:net:338:16
+      1   50.0%          LazyCompile: ~WriteStream node:tty:84:21
+      1  100.0%            LazyCompile: ~createWritableStdioStream node:internal/bootstrap/switches/is_main_thread:45:35
+      1   50.0%          LazyCompile: ~TLSSocket node:_tls_wrap:470:19
+      1  100.0%            LazyCompile: ~connect node:_tls_wrap:1607:35
+
+     56    1.3%  epoll_pwait@@GLIBC_2.6
+
+     56    1.3%  __lll_lock_wait
+      1    1.8%    LazyCompile: ~end node:_http_outgoing:997:45
+      1  100.0%      LazyCompile: ~XMLHttpRequest.send /home/captainhandsome/project-tiara-device-client-v2/node_modules/xmlhttprequest-ssl/lib/XMLHttpRequest.js:284:23
+      1  100.0%        LazyCompile: ~create /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:279:11
+      1  100.0%          LazyCompile: ~Request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:264:16
+      1  100.0%            LazyCompile: ~request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:220:12
+      1    1.8%    LazyCompile: ~encodePacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-parser/build/cjs/encodePacket.js:4:22
+      1  100.0%      Function: ^write /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:80:10
+      1  100.0%        LazyCompile: ~send /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:71:9
+      1  100.0%          Function: ^flush /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:414:10
+      1  100.0%            LazyCompile: ~sendPacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:481:15
+      1    1.8%    LazyCompile: ~encode /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-parser/build/cjs/index.js:43:11
+      1  100.0%      Function: ^_packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:292:12
+      1  100.0%        Function: ^packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:395:11
+      1  100.0%          Function: ^<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:532:25
+      1  100.0%            Function: ^<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/OutputToggleBase.js:20:45
+      1    1.8%    LazyCompile: ~consume /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:93:10
+      1  100.0%      LazyCompile: ~getData /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:410:10
+      1  100.0%        Function: ^startLoop /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:129:12
+      1  100.0%          Function: ^_write /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/receiver.js:78:9
+      1  100.0%            Function: ^writeOrBuffer node:internal/streams/writable:368:23
+
+     55    1.3%  fwrite@@GLIBC_2.4
+      1    1.8%    LazyCompile: ~toRealPath node:internal/modules/cjs/loader:476:20
+      1  100.0%      LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:582:28
+      1  100.0%        LazyCompile: ~resolveMainPath node:internal/modules/run_main:15:25
+      1  100.0%          LazyCompile: ~executeUserEntryPoint node:internal/modules/run_main:74:31
+      1  100.0%            Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      1    1.8%    LazyCompile: ~saveDataSync /home/captainhandsome/project-tiara-device-client-v2/dist/PersistedOutput.js:32:22
+      1  100.0%      LazyCompile: ~toggleOutput /home/captainhandsome/project-tiara-device-client-v2/dist/PersistedOutput.js:75:22
+      1  100.0%        LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/OutputToggleBase.js:20:45
+      1  100.0%          node::wasi::WASI::FdPrestatDirName(v8::FunctionCallbackInfo<v8::Value> const&)
+      1  100.0%            Function: ^processTicksAndRejections node:internal/process/task_queues:67:35
+      1    1.8%    LazyCompile: ~resolveExports node:internal/modules/cjs/loader:555:24
+      1  100.0%      LazyCompile: ~Module._findPath node:internal/modules/cjs/loader:582:28
+      1  100.0%        LazyCompile: ~Module._resolveFilename node:internal/modules/cjs/loader:984:35
+      1  100.0%          LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%            LazyCompile: ~Module.require node:internal/modules/cjs/loader:1133:36
+      1    1.8%    LazyCompile: ~resetBuffer node:internal/streams/writable:202:21
+      1  100.0%      LazyCompile: ~clearBuffer node:internal/streams/writable:532:21
+      1  100.0%        LazyCompile: ~Writable.uncork node:internal/streams/writable:344:37
+      1  100.0%          LazyCompile: ~_flushOutput node:_http_outgoing:1121:63
+      1  100.0%            LazyCompile: ~_flush node:_http_outgoing:1104:51
+      1    1.8%    LazyCompile: ~reduceToSingleString node:internal/util/inspect:2007:30
+      1  100.0%      LazyCompile: ~formatRaw node:internal/util/inspect:844:19
+      1  100.0%        Function: ^formatValue node:internal/util/inspect:766:21
+      1  100.0%          LazyCompile: ~inspect node:internal/util/inspect:310:17
+      1  100.0%            Function: ^formatWithOptionsInternal node:internal/util/inspect:2154:35
+      1    1.8%    LazyCompile: ~patchProcessObject node:internal/process/pre_execution:127:28
+      1  100.0%      LazyCompile: ~prepareExecution node:internal/process/pre_execution:52:26
+      1  100.0%        LazyCompile: ~prepareMainThreadExecution node:internal/process/pre_execution:36:36
+      1  100.0%          Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      1    1.8%    LazyCompile: ~onwrite node:internal/streams/writable:428:17
+      1  100.0%      LazyCompile: ~afterWriteDispatched node:internal/stream_base_commons:155:30
+      1  100.0%        LazyCompile: ~writeGeneric node:internal/stream_base_commons:147:22
+      1  100.0%          LazyCompile: ~Socket._writeGeneric node:net:899:42
+      1  100.0%            LazyCompile: ~Socket._write node:net:941:35
+      1    1.8%    LazyCompile: ~encode /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-parser/build/cjs/index.js:43:11
+      1  100.0%      LazyCompile: ~_packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:292:12
+      1  100.0%        LazyCompile: ~packet /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:395:11
+      1  100.0%          LazyCompile: ~_sendConnectPacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:421:23
+      1  100.0%            LazyCompile: ~onopen /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:404:11
+      1    1.8%    LazyCompile: ~copyPrototype node:internal/per_context/primordials:121:23
+      1  100.0%      LazyCompile: ~<anonymous> node:internal/per_context/primordials:223:11
+      1  100.0%        /usr/bin/node
+      1  100.0%          Function: ~<anonymous> node:internal/per_context/primordials:1:1
+      1    1.8%    LazyCompile: ~closeSocketHandle node:net:318:27
+      1  100.0%      LazyCompile: ~Socket._destroy node:net:772:37
+      1  100.0%        LazyCompile: ~_destroy node:internal/streams/destroy:77:18
+      1  100.0%          LazyCompile: ~destroy node:internal/streams/destroy:39:17
+      1  100.0%            LazyCompile: ~onceWrapper node:events:622:21
+      1    1.8%    LazyCompile: ~clearTimeout node:timers:185:22
+      1  100.0%      LazyCompile: ~subDestroy /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:178:47
+      1  100.0%        LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:306:27
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: ~cleanup /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:304:12
+      1    1.8%    LazyCompile: ~Writable.write node:internal/streams/writable:336:36
+      1  100.0%      LazyCompile: ~value node:internal/console/constructor:272:20
+      1  100.0%        LazyCompile: ~log node:internal/console/constructor:376:6
+      1  100.0%          node::inspector::protocol::TracingAgent::getCategories(std::unique_ptr<node::inspector::protocol::Array<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::default_delete<node::inspector::protocol::Array<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >*)
+      1  100.0%            Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/Components/HWIDLoader.js:1:1
+      1    1.8%    LazyCompile: ~WebSocket /home/captainhandsome/project-tiara-device-client-v2/node_modules/ws/lib/websocket.js:52:14
+      1  100.0%      LazyCompile: ~doOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:33:11
+      1  100.0%        LazyCompile: ~open /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:51:9
+      1  100.0%          LazyCompile: ~probe /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:204:10
+      1  100.0%            LazyCompile: ~onOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:301:11
+      1    1.8%    LazyCompile: ~Socket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:22:16
+      1  100.0%      LazyCompile: ~open /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:132:9
+      1  100.0%        LazyCompile: ~connect /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:170:12
+      1  100.0%          LazyCompile: ~connect /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:42:17
+      1  100.0%            Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/PTClient.js:1:1
+      1    1.8%    LazyCompile: ~Request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:264:16
+      1  100.0%      LazyCompile: ~request /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:220:12
+      1  100.0%        LazyCompile: ~doPoll /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:246:11
+      1  100.0%          LazyCompile: ~poll /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:106:9
+      1  100.0%            LazyCompile: ~doOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/polling.js:62:11
+      1    1.8%    LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1  100.0%      LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1  100.0%        LazyCompile: ~executeUserEntryPoint node:internal/modules/run_main:74:31
+      1  100.0%          Function: ~<anonymous> node:internal/main/run_main_module:1:1
+      1    1.8%    LazyCompile: ~Manager /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:35:16
+      1  100.0%      LazyCompile: ~lookup /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/index.js:18:16
+      1  100.0%        Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:1:1
+      1  100.0%          LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1  100.0%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1    1.8%    LazyCompile: ~IncomingMessage node:_http_incoming:53:25
+      1  100.0%      LazyCompile: ~parserOnHeadersComplete node:_http_common:72:33
+      1  100.0%        node::http2::Http2Session::OnHeaderCallback(nghttp2_session*, nghttp2_frame const*, nghttp2_rcbuf*, nghttp2_rcbuf*, unsigned char, void*)
+      1  100.0%          LazyCompile: ~socketOnData node:_http_client:535:22
+      1  100.0%            LazyCompile: ~emit node:events:460:44
+      1    1.8%    LazyCompile: ~Duplex node:internal/streams/duplex:54:16
+      1  100.0%      LazyCompile: ~Socket node:net:338:16
+      1  100.0%        LazyCompile: ~WriteStream node:tty:84:21
+      1  100.0%          LazyCompile: ~createWritableStdioStream node:internal/bootstrap/switches/is_main_thread:45:35
+      1  100.0%            LazyCompile: ~getStderr node:internal/bootstrap/switches/is_main_thread:168:19
+      1    1.8%    LazyCompile: ~<anonymous> node:internal/fs/utils:691:38
+      1  100.0%      LazyCompile: ~<anonymous> node:internal/fs/utils:703:42
+      1  100.0%        LazyCompile: ~openSync node:fs:592:18
+      1  100.0%          LazyCompile: ~readFileSync node:fs:466:22
+      1  100.0%            LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1    1.8%    LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/manager.js:143:68
+      1  100.0%      LazyCompile: ~Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%        LazyCompile: ~onOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:301:11
+      1  100.0%          LazyCompile: ~onHandshake /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:363:16
+      1  100.0%            LazyCompile: ~onPacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:323:13
+      1    1.8%    LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:87:79
+      1  100.0%      LazyCompile: ~encodePacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-parser/build/cjs/encodePacket.js:4:22
+      1  100.0%        LazyCompile: ~write /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transports/websocket.js:80:10
+      1  100.0%          LazyCompile: ~send /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:71:9
+      1  100.0%            LazyCompile: ~onTransportOpen /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:209:33
+      1    1.8%    LazyCompile: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/WebSockets/WSClient.js:84:30
+      1  100.0%      Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%        LazyCompile: ~onconnect /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:567:14
+      1  100.0%          LazyCompile: ~onpacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/socket.io-client/build/cjs/socket.js:459:13
+      1  100.0%            Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1    1.8%    Function: ~<anonymous> node:internal/process/per_thread:1:1
+      1  100.0%      Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%        LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%          Function: ~<anonymous> node:internal/bootstrap/node:1:1
+      1    1.8%    Function: ~<anonymous> node:internal/bootstrap/node:1:1
+      1    1.8%    Function: ~<anonymous> node:buffer:1:1
+      1  100.0%      Function: ^compileForInternalLoader node:internal/bootstrap/loaders:319:27
+      1  100.0%        LazyCompile: ~requireBuiltin node:internal/bootstrap/loaders:356:24
+      1  100.0%          LazyCompile: ~setupBuffer node:internal/bootstrap/node:433:21
+      1  100.0%            Function: ~<anonymous> node:internal/bootstrap/node:1:1
+      1    1.8%    Function: ~<anonymous> /home/captainhandsome/project-tiara-device-client-v2/dist/PTClient.js:1:1
+      1  100.0%      LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1  100.0%        LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1  100.0%          LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1  100.0%            LazyCompile: ~Module._load node:internal/modules/cjs/loader:886:24
+      1    1.8%    Function: ^processTicksAndRejections node:internal/process/task_queues:67:35
+      1    1.8%    Function: ^internalCompileFunction node:internal/vm:31:33
+      1  100.0%      LazyCompile: ~wrapSafe node:internal/modules/cjs/loader:1152:18
+      1  100.0%        LazyCompile: ~Module._compile node:internal/modules/cjs/loader:1208:37
+      1  100.0%          LazyCompile: ~Module._extensions..js node:internal/modules/cjs/loader:1263:37
+      1  100.0%            LazyCompile: ~Module.load node:internal/modules/cjs/loader:1105:33
+      1    1.8%    Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%      LazyCompile: ~onPacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/socket.js:323:13
+      1  100.0%        Function: ^Emitter.emit /home/captainhandsome/project-tiara-device-client-v2/node_modules/@socket.io/component-emitter/index.js:130:34
+      1  100.0%          Function: ^onPacket /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:105:13
+      1  100.0%            Function: ^onData /home/captainhandsome/project-tiara-device-client-v2/node_modules/engine.io-client/build/cjs/transport.js:96:11
+      1    1.8%    /usr/bin/node
+      1  100.0%      LazyCompile: ~isIPv6 node:internal/net:38:16
+      1  100.0%        LazyCompile: ~isIP node:internal/net:45:14
+      1  100.0%          LazyCompile: ~lookupAndConnect node:net:1209:26
+      1  100.0%            LazyCompile: ~Socket.connect node:net:1141:36
+
+     51    1.2%  node::crypto::CryptoJob<node::crypto::ScryptTraits>::MemoryInfo(node::MemoryTracker*) const
+     51  100.0%    LazyCompile: ~TLSSocket.getPeerCertificate node:_tls_wrap:999:50
+     51  100.0%      LazyCompile: ~onConnectSecure node:_tls_wrap:1526:25
+     42   82.4%        Function: ^emit node:events:460:44
+     42  100.0%          LazyCompile: ~TLSSocket._finishInit node:_tls_wrap:933:43
+     42  100.0%            LazyCompile: ~ssl.onhandshakedone node:_tls_wrap:741:27
+      9   17.6%        LazyCompile: ~emit node:events:460:44
+      9  100.0%          LazyCompile: ~TLSSocket._finishInit node:_tls_wrap:933:43
+      9  100.0%            LazyCompile: ~ssl.onhandshakedone node:_tls_wrap:741:27
+

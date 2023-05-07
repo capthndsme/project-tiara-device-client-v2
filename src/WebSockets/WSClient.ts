@@ -46,24 +46,13 @@ export function connect() {
    setInterval(() => {
       if (!socket.connected) {
          console.log("[WSC] Socket not connected, reconnecting");
-         connectFailCount++;
-         if (connectFailCount > 5) {
-            console.log("[WSC] We have failed to connect 5 times, we will now exit.");
-            console.log("[WSC] TIP: This should be running under systemd or pm2, so it will restart automatically.")
-            // quit the process, so systemd or pm2 can restart it.
-            // we are doing this because, sometimes, the websocket will fail to reconnect.
-            // besides, its a good idea to restart the process every now and then.
-            return process.exit(1);
-         }
-         return socket.connect();
+         socket.connect();
       }
       console.log("[WSC] Sending heartbeat.")
       let pingStart = Date.now();
       socket.timeout(15000).emit("heartbeat", null, (err: boolean, data: any) => {
          if (err) {
-            console.log("[WSC] Heartbeat failed. Trying to reconnect.");
-            if (!socket.connected) socket.connect();
-            connectFailCount++;
+            console.log("[WSC] Heartbeat failed.");
             console.log(err);
          } else {
             let latency = (Date.now() - pingStart);
@@ -71,14 +60,13 @@ export function connect() {
             console.log("[WSC] WebSocket Latency: " + latency + "ms");
             addToSlidingWindow(latency);
             console.log("[WSC] Average Latency: " + getAverageLatency() + "ms");
-            console.log("[WSC] Since we are connected, we will reset the connectFailCount");
-            connectFailCount = 0;
             socket.emit("SyncDeviceState", localDeviceState);
          }
       });
    }, 30000);
    socket.connect();
 }
+
 
 socket.on("connect", () => {
    console.log("Connected to server");
