@@ -1,8 +1,9 @@
 import { OutputToggleBase } from "../OutputToggleBase";
 import { ServoTypes, write, writeDelayReturn } from "../ServoController";
 import { ToggleType } from "../Types/DeviceBaseToggle";
-import { ExecuteResult } from "../Types/ExecuteResult";
+ 
 import { ToggleEvent } from "../Types/ToggleEvent";
+import { ToggleResult } from "../Types/ToggleResult";
 
 /**
  * Because FoodDispense and FoodbowlClean both rely on the swing mechanism (FoodBowl1),
@@ -54,14 +55,15 @@ function GenericServoRepeating(
 	repeat: number = 3
 ): Promise<void> {
 	if (repeat <= 0) {
+      console.log("GenericServoRepeating End , resolving")
 		return Promise.resolve();
 	} else {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
          setTimeout(() => {
             write(servo, angleStart).then(() => {
                setTimeout(() => {
                   write(servo, angleEnd).then(() => {
-                     return GenericServoRepeating(servo, angleStart, angleEnd, delayStart, duration, repeat - 1);
+                     return GenericServoRepeating(servo, angleStart, angleEnd, delayStart, duration, repeat - 1).then(resolve)
                   });
                }, duration);
             });
@@ -71,7 +73,7 @@ function GenericServoRepeating(
 	}
 }
 
-function FoodBowlDispense(event: ToggleEvent): Promise<ExecuteResult>  {
+function FoodBowlDispense(event: ToggleEvent): Promise<ToggleResult>  {
 	if (FoodSwingLock) return Promise.resolve({
       success: false,
       message: "FOOD_SWING_LOCKED"
@@ -106,7 +108,7 @@ function FoodBowlDispense(event: ToggleEvent): Promise<ExecuteResult>  {
 
 
 
-function FoodBowlClean(event: ToggleEvent): Promise<ExecuteResult>  {
+function FoodBowlClean(event: ToggleEvent): Promise<ToggleResult>  {
    if (FoodSwingLock) return Promise.resolve({
       success: false,
       message: "FOOD_SWING_LOCKED"
@@ -141,7 +143,7 @@ function FoodBowlClean(event: ToggleEvent): Promise<ExecuteResult>  {
    });
 }
 
-function PoopPadFrontCleaning(): Promise<ExecuteResult>  {
+function PoopPadFrontCleaning(): Promise<ToggleResult>  {
    return new Promise((resolve) => {
       GenericServoRepeating(
          ServoTypes.PoopPad1,
@@ -152,14 +154,15 @@ function PoopPadFrontCleaning(): Promise<ExecuteResult>  {
          2    // 2 repeats
       )
       .then(() => {
+         console.log("PoopPadFrontCleaning End")
          resolve({success: true});
       })
       .catch(() => {
-         resolve({success: false, message: "ERROR_IN_SERVO"});
+         resolve({success: false, message: "Servo Failed"});
       })
    });
 }
-function PoopPadBackCleaning(): Promise<ExecuteResult> {
+function PoopPadBackCleaning(): Promise<ToggleResult> {
    return new Promise((resolve) => {
       GenericServoRepeating(
          ServoTypes.PoopPad1,
@@ -170,10 +173,11 @@ function PoopPadBackCleaning(): Promise<ExecuteResult> {
          2
       )
       .then(() => {
+         console.log("PoopPadBackCleaning End")
          resolve({success: true});
       })
       .catch(() => {
-         resolve({success: false, message: "ERROR_IN_SERVO"});
+         resolve({success: false, message: "Servo Failed"});
       })
    });
 }

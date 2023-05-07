@@ -7,7 +7,7 @@ import { ToggleEvent } from "../Types/ToggleEvent";
 import { localDeviceState } from "../Components/LocalDeviceState";
 import { DeviceReqStatus } from "../Types/DeviceReqStatus";
 import { ScheduledTask } from "../Types/Scheduler";
-import { getScheduledTasks } from "../ScheduledTask/Scheduler";
+import { getScheduledTasks, insertScheduledTask } from "../ScheduledTask/Scheduler";
 export const socket = io(config.syncUrl + "/device", {
    autoConnect: false,
    reconnection: true,
@@ -104,3 +104,8 @@ socket.on("getDeviceScheduler", (data, callback: (data: Array<ScheduledTask>) =>
 export function getSocket(): Socket {
    return socket;
 }
+
+socket.on("AddTrigger", (data: ScheduledTask, callback: (any) => void) => {
+   const insertSuccess= insertScheduledTask(data);
+   callback({success: insertSuccess});
+});

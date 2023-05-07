@@ -3,6 +3,8 @@ import { SharedEventBus } from "./Components/SharedEventBus";
 import { createOutput, findToggle, releaseOutput, toggleOutput, tryLockOutput } from "./PersistedOutput";
 import { ToggleEvent } from "./Types/ToggleEvent";
 import { ToggleType } from "./Types/DeviceBaseToggle";
+import { ToggleResult } from "./Types/ToggleResult";
+ 
 export function OutputToggleBase(outputName: string, outputDescription: string = "", toggleType: ToggleType, executeFunction: Function) {
 	console.log(`[OutputToggleBase] Creating ToggleBase for ${outputName}`);
 
@@ -16,24 +18,31 @@ export function OutputToggleBase(outputName: string, outputDescription: string =
 		if (event.toggleName == outputName) {
 			console.log("Toggle event");
 			console.log(event);
+			let timeoutLock; 
 			if (tryLockOutput(outputName)) {
-				executeFunction(event).then((executeResult) => {
+				setTimeout(() => {
+					console.warn("Timeout got stuck! Releasing lock forcefully.");
+					releaseOutput(outputName);
+					// A 70-second timeout is a bit excessive, but it's better than nothing.
+				}, 70000)
+				executeFunction(event).then((executeResult: ToggleResult) => {
 					console.log("Execute function ended");
+					clearTimeout(timeoutLock)
 					releaseOutput(outputName);
 					//TODO: When we have a non-toggle output types (Like dispense), we need to change this.
 					// Although it's not a big deal, since the toggle value is only used for the UI.
 					toggleOutput(outputName, event.toggleValue);
 					if (event.callback) {
-						event.callback({
-							hasError: executeResult?executeResult:false,// If executeResult is undefined, we assume no error.
-						});
+						// Passthrough the callback from the client.
+						event.callback(executeResult);
 					}
 				});
 			} else {
 				if (event.callback) {
+					
 					event.callback({
-						hasError: true,
-						error: "ERR_OUTPUT_HAS_LOCK",
+						success: false,
+						message: "Someone else is toggling this output.",
 					});
 				}
 			}
@@ -45,27 +54,33 @@ export function OutputToggleBase(outputName: string, outputDescription: string =
 	SharedEventBus.on("ToggleEventSystemTriggered", (event: ToggleEvent) => {
 		if (event.toggleName == outputName) {
 			console.log("[OutputToggleBase %s] Toggle Event (System-Triggered) Received", outputName);
+			let timeoutLock; 
 			if (tryLockOutput(outputName)) {
-				SharedEventBus.emit("SystemTriggeredStart"); // signal our websocket client that a system-triggered event has started, so locks can be updated on the client.
-				executeFunction(event).then((executeResult) => {
-					console.log("Execute function ended");
+				setTimeout(() => {
+					console.warn("Timeout got stuck! Releasing lock forcefully.");
 					releaseOutput(outputName);
-					// Looks like we forgot to mutate our local persisted state, so lets do that now.
-
+					// A 70-second timeout is a bit excessive, but it's better than nothing.
+				}, 70000)
+				executeFunction(event).then((executeResult: ToggleResult) => {
+					console.log("Execute function ended");
+					clearTimeout(timeoutLock)
+					releaseOutput(outputName);
 					//TODO: When we have a non-toggle output types (Like dispense), we need to change this.
 					// Although it's not a big deal, since the toggle value is only used for the UI.
 					toggleOutput(outputName, event.toggleValue);
 					if (event.callback) {
-						event.callback({
-							hasError: false,
-						});
+						// Passthrough the callback from the client.
+						event.callback(executeResult);
 					}
 				});
 			} else {
-				event.callback({
-					hasError: true,
-					error: "ERR_OUTPUT_HAS_LOCK",
-				});
+				if (event.callback) {
+					
+					event.callback({
+						success: false,
+						message: "Someone else is toggling this output.",
+					});
+				}
 			}
 		}
 	});

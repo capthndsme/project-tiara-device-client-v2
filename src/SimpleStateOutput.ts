@@ -4,7 +4,8 @@ import { createOutput } from "./PersistedOutput";
 import { OutputToggleBase } from "./OutputToggleBase";
 import { ToggleType } from "./Types/DeviceBaseToggle";
 import { ToggleEvent } from "./Types/ToggleEvent";
-import { ExecuteResult } from "./Types/ExecuteResult";
+import { ToggleResult } from "./Types/ToggleResult";
+ 
 
 
 export function SimpleStateOutput(pin: number, name: string, description: string, toggleType: ToggleType): void {
@@ -16,7 +17,7 @@ export function SimpleStateOutput(pin: number, name: string, description: string
       name,
       description,
       toggleType,
-      (event: ToggleEvent): Promise<ExecuteResult> => {
+      (event: ToggleEvent): Promise<ToggleResult> => {
          return new Promise((resolve, reject) => {
             console.log(`[SimpleStateOutput for ${name}] Executing`);
             if (event.toggleValue) {

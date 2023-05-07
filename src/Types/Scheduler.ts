@@ -1,4 +1,5 @@
 export interface ScheduledTask {
+	outputName: string;
 	every: SchedulerTime[] | null;
 	tempRange: [number, number] | null;
 	timeRange: {
@@ -24,16 +25,8 @@ export interface TempTriggerArray {
 
 
 export const ScheduledTaskBase = {
+	outputName: "",
 	every: null,
 	tempRange: null,
-	timeRange: {
-		from: {
-			time: null,
-			lastExecuted: 0,
-		},
-		to: {
-			time: null,
-			lastExecuted: 0,
-		},
-	},
+	timeRange: null,
 }
