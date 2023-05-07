@@ -1,9 +1,9 @@
 import fs from "node:fs";
 
-export const MAC_ADDR: string = fs.readFileSync("/sys/class/net/eth0/address", 'utf8').replace(/:/g, '').replace("\n", "")
-export const HWID_EXTRA_RANDOM: string = fs.readFileSync("/boot/hwid_supplemental_random", 'utf8')
+export const MAC_ADDR: string = "00000000d326daef"
+export const HWID_EXTRA_RANDOM: string = "SC7Rl5pWKoc4mp2y"
  
-export const SN: string = fs.readFileSync("/sys/firmware/devicetree/base/serial-number", "utf-8")
+export const SN: string = "b827eb26daef"
 export const HWID_STRING: string = (SN + HWID_EXTRA_RANDOM + MAC_ADDR).replace(/\0/g, '');
 
 console.log("SERIAL", SN)
