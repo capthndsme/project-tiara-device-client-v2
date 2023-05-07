@@ -1,6 +1,7 @@
 import { OutputToggleBase } from "../OutputToggleBase";
 import { ServoTypes, write, writeDelayReturn } from "../ServoController";
 import { ToggleType } from "../Types/DeviceBaseToggle";
+import { ExecuteResult } from "../Types/ExecuteResult";
 import { ToggleEvent } from "../Types/ToggleEvent";
 
 /**
@@ -70,8 +71,11 @@ function GenericServoRepeating(
 	}
 }
 
-function FoodBowlDispense(event: ToggleEvent) {
-	if (FoodSwingLock) return Promise.resolve(false);
+function FoodBowlDispense(event: ToggleEvent): Promise<ExecuteResult>  {
+	if (FoodSwingLock) return Promise.resolve({
+      success: false,
+      message: "FOOD_SWING_LOCKED"
+   });
 	return new Promise((resolve) => {
 		FoodSwingLock = true;
 		// Open foodbowl1
@@ -86,7 +90,7 @@ function FoodBowlDispense(event: ToggleEvent) {
                   write(ServoTypes.FoodBowl1, 90).then(() => {
                      FoodSwingLock = false;
                      
-                     resolve(true);
+                     resolve({success: true});
                   });
                });
 				}, 1000);
@@ -94,16 +98,19 @@ function FoodBowlDispense(event: ToggleEvent) {
 			.catch((e) => {
 				FoodSwingLock = false;
 				console.warn("Servo writing failed.");
-				console.trace(e);
-				resolve(false);
+            console.trace(e);
+            resolve({success: false, message: "ERROR_IN_SERVO"});
 			});
 	});
 }
 
 
 
-function FoodBowlClean(event: ToggleEvent) {
-	if (FoodSwingLock) return Promise.resolve(false);
+function FoodBowlClean(event: ToggleEvent): Promise<ExecuteResult>  {
+   if (FoodSwingLock) return Promise.resolve({
+      success: false,
+      message: "FOOD_SWING_LOCKED"
+   });
    return new Promise((resolve) => {
       FoodSwingLock = true;
       // Open foodbowl1
@@ -120,7 +127,7 @@ function FoodBowlClean(event: ToggleEvent) {
                writeDelayReturn(ServoTypes.FoodBowl1, 0, 1000)
                .then(() => {
                   FoodSwingLock = false;
-                  resolve(true);
+                  resolve({success: true});
                });
             });
          });
@@ -129,12 +136,12 @@ function FoodBowlClean(event: ToggleEvent) {
          FoodSwingLock = false;
          console.warn("Servo writing failed.");
          console.trace(e);
-         resolve(false);
+         resolve({success: false, message: "ERROR_IN_SERVO"});
       })
    });
 }
 
-function PoopPadFrontCleaning() {
+function PoopPadFrontCleaning(): Promise<ExecuteResult>  {
    return new Promise((resolve) => {
       GenericServoRepeating(
          ServoTypes.PoopPad1,
@@ -144,9 +151,15 @@ function PoopPadFrontCleaning() {
          400, // 400ms duration (time to reach 90 degrees)
          2    // 2 repeats
       )
+      .then(() => {
+         resolve({success: true});
+      })
+      .catch(() => {
+         resolve({success: false, message: "ERROR_IN_SERVO"});
+      })
    });
 }
-function PoopPadBackCleaning() {
+function PoopPadBackCleaning(): Promise<ExecuteResult> {
    return new Promise((resolve) => {
       GenericServoRepeating(
          ServoTypes.PoopPad1,
@@ -156,6 +169,12 @@ function PoopPadBackCleaning() {
          400,
          2
       )
+      .then(() => {
+         resolve({success: true});
+      })
+      .catch(() => {
+         resolve({success: false, message: "ERROR_IN_SERVO"});
+      })
    });
 }
 
