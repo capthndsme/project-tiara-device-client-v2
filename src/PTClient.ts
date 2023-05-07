@@ -5,9 +5,7 @@ import fs from "node:fs"
 // Initialise our ServoController as early as possible. Ignore the warning about unused vars.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars 
 import * as ServoController from "./ServoController"; 
-ServoController.port.open(() => {
-   console.log("[PTClient] ServoController open success.");
-})
+ 
 import * as WSClient from "./WebSockets/WSClient"
 import * as Scheduler from "./ScheduledTask/Scheduler"
 console.log("[PTClient] Initialising client...");

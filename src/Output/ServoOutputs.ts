@@ -23,7 +23,7 @@ function FoodDispenseAction(repeat: number = 3): Promise<void> {
                // Dispense Close
                setTimeout(() => {
                   write(ServoTypes.FoodDispenser, 0).then(() => {
-                     return FoodDispenseAction(repeat - 1)
+                     return FoodDispenseAction(repeat - 1).then(resolve); // Add this line
                   });
                }, 400);
             });

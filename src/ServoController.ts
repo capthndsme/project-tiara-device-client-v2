@@ -104,11 +104,9 @@ export function write(servo: ServoTypes, angle: number): Promise<void>  {
 
       port.write(`${servo} ${angle} ${CallbackIdentifier}\r\n`, (err) => {
          if (err) reject();
-         port.drain((drainErr) => {
-            if (drainErr) reject();
-            console.log("[ServoController Debug]: Written and drained. Callback registered for", CallbackIdentifier)
-            ServoCallbacks.push({ identifier: CallbackIdentifier, resolve, latency: Date.now() });
-         })
+      
+         console.log("[ServoController Debug]: Written. Callback registered for", CallbackIdentifier)
+         ServoCallbacks.push({ identifier: CallbackIdentifier, resolve, latency: Date.now() });
       });
    });
 }
