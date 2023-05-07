@@ -1,0 +1,2 @@
+#!/bin/bash
+libcamera-vid --inline --nopreview -t 0 --width 1280 --height 960 --bitrate 4250000  --framerate 30 --codec h264 -o - | ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 -thread_queue_size 1024 -use_wallclock_as_timestamps 1 -i pipe:0 -c:v copy -c:a aac -preset fast -strict experimental -f flv "rtmp://ptserver.capthndsme.xyz/live/$1?deviceHwid=$2&deviceKey=$3"
