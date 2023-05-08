@@ -27,9 +27,9 @@ function FoodDispenseAction(repeat: number = 3): Promise<void> {
                   write(ServoTypes.FoodDispenser, 0).then(() => {
                      return FoodDispenseAction(repeat - 1).then(resolve); // Add this line
                   });
-               }, 400);
+               }, 200);
             });
-         }, 300);
+         }, 100);
       });
       // Delay start
 	}
@@ -81,7 +81,7 @@ function FoodBowlDispense(event: ToggleEvent): Promise<ToggleResult>  {
 	return new Promise((resolve) => {
 		FoodSwingLock = true;
 		// Open foodbowl1
-		write(ServoTypes.FoodBowl1, 0)
+		write(ServoTypes.FoodBowl1, 90)
 			.then(() => {
 				// Wait for foodbowl swing to open.
 				setTimeout(() => {
@@ -89,7 +89,7 @@ function FoodBowlDispense(event: ToggleEvent): Promise<ToggleResult>  {
 					FoodDispenseAction(2).then(() => {
                   // Close foodbowl1
                   console.log("FoodDispenseAction End")
-                  write(ServoTypes.FoodBowl1, 90).then(() => {
+                  write(ServoTypes.FoodBowl1, 0).then(() => {
                      FoodSwingLock = false;
                      
                      resolve({success: true});
@@ -147,7 +147,7 @@ function PoopPadFrontCleaning(): Promise<ToggleResult>  {
    return new Promise((resolve) => {
       GenericServoRepeating(
          ServoTypes.PoopPad1,
-         135, // 135 degrees means a slower clockwise rotation in an continuous servo. 
+         45, // 135 degrees means a slower clockwise rotation in an continuous servo. 
          90,  // 90 degrees means stop .
          400, // 400ms start
          400, // 400ms duration (time to reach 90 degrees)
@@ -165,8 +165,8 @@ function PoopPadFrontCleaning(): Promise<ToggleResult>  {
 function PoopPadBackCleaning(): Promise<ToggleResult> {
    return new Promise((resolve) => {
       GenericServoRepeating(
-         ServoTypes.PoopPad1,
-         45, // 45 degrees means a slower counter-clockwise rotation in an continuous servo. 
+         ServoTypes.PoopPad2,
+         135, // 45 degrees means a slower counter-clockwise rotation in an continuous servo. 
          90, // 90 degrees means stop .
          400,
          400,
@@ -182,11 +182,29 @@ function PoopPadBackCleaning(): Promise<ToggleResult> {
    });
 }
 
+function DoorLock(event: ToggleEvent): Promise<ToggleResult>  {
+   return new Promise((resolve) => {
+      write(
+         ServoTypes.DoorLock,
+         event.toggleValue ? 90 : 0,
+      ).then(() => {
+         resolve({
+            success: true,
+         })
+      })
+      .catch(e=> {
+         resolve({
+            success: false,
+            message: e
+         })
+      })
+   });
+}
 
 OutputToggleBase("foodDispense", "Dispense Food", ToggleType.ONEOFF, FoodBowlDispense);
 OutputToggleBase("foodbowlClean", "Clean foodbowl", ToggleType.ONEOFF, FoodBowlClean);
 OutputToggleBase("poopPadFront", "Poop Pad Cleaning (front)", ToggleType.ONEOFF, PoopPadFrontCleaning);
 OutputToggleBase("poopPadBack", "Poop Pad Cleaning (back)", ToggleType.ONEOFF, PoopPadBackCleaning);
 // Door lock: Not implemented yet. Waiting for servo to arrive.
-OutputToggleBase("doorLock", "Door Lock", ToggleType.SWITCH, (event) => Promise.resolve(true));
+OutputToggleBase("doorLock", "Door Lock", ToggleType.SWITCH, DoorLock);
    

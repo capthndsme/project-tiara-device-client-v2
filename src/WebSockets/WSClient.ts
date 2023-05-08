@@ -8,6 +8,8 @@ import { localDeviceState } from "../Components/LocalDeviceState";
 import { DeviceReqStatus } from "../Types/DeviceReqStatus";
 import { ScheduledTask } from "../Types/Scheduler";
 import { getScheduledTasks, insertScheduledTask } from "../ScheduledTask/Scheduler";
+import { createNotification } from "../Components/NotificationSender";
+import { NotificationType } from "../Types/NotificationType";
 export const socket = io(config.syncUrl + "/device", {
    autoConnect: false,
    reconnection: true,
@@ -70,6 +72,11 @@ export function connect() {
 
 socket.on("connect", () => {
    console.log("Connected to server");
+   createNotification(
+      "Device went online",
+      "Device is online and connected to the server.",
+      NotificationType.SYSTEM_STARTED
+   )
    // Websocket is connected, emit event for other subsystems to use
    SharedEventBus.emit("WSClientConnected");
    socket.on("ToggleStateMutate", (data: DeviceBaseToggle, callback) => {

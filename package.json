@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/i2c-bus": "^5.1.0",
+    "@types/node": "^20.1.0",
     "@types/node-dht-sensor": "^0.4.0",
     "@types/rpio": "^2.4.2",
     "concurrently": "^8.0.1",

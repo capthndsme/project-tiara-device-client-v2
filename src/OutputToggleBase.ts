@@ -5,7 +5,7 @@ import { ToggleEvent } from "./Types/ToggleEvent";
 import { ToggleType } from "./Types/DeviceBaseToggle";
 import { ToggleResult } from "./Types/ToggleResult";
  
-export function OutputToggleBase(outputName: string, outputDescription: string = "", toggleType: ToggleType, executeFunction: Function) {
+export function OutputToggleBase(outputName: string, outputDescription: string = "", toggleType: ToggleType, executeFunction: (event: ToggleEvent) => Promise<ToggleResult>) {
 	console.log(`[OutputToggleBase] Creating ToggleBase for ${outputName}`);
 
 	createOutput(outputName, outputDescription, toggleType);
