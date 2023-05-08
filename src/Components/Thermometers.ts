@@ -11,10 +11,16 @@ let thermometerOutside: Thermometer = {
 	Temperature: -127, // -127 is the default value for the sensor, if it is -127, it is not connected.
 	Humidity: -1, // We know for sure any sane humidity will be above 0, so we can use this to determine if the sensor is connected.
 };
+let thermometerCPU: Thermometer = {
+	Temperature: -127, // -127 is the default value for the sensor, if it is -127, it is not connected.
+	Humidity: -1, // There is, of course, no humidity sensor on the CPU.
+};
+
 
 export let thermometerRegions: ThermometerRegions = {
 	Inside: thermometerInside,
 	Outside: thermometerOutside,
+	CPU: thermometerCPU
 };
 
 // When this file is imported, we should initialise or node-dht-sensor library.
@@ -42,7 +48,7 @@ proc.on("spawn", () => {
 	console.log("[Thermometers] IsolatedDHTReader spawned.");
 	let linereader = rl.createInterface(proc.stdout, proc.stdin);
 	linereader.on("line", (lineMsg) => {
-		console.log("Raw message: " + lineMsg);
+		 
 
 		const Message: string = lineMsg.toString().trim();
 		const MessageSplits: string[] = Message.split(" ");
@@ -53,12 +59,12 @@ proc.on("spawn", () => {
 		const Temperature: string = MessageSplits[1];
 		const Humidity: string = MessageSplits[2];
 		if (Command === "TEMP_INSIDE_READ") {
-			console.log("Got temperature inside: " + Temperature + " and humidity: " + Humidity);
+ 
 			thermometerInside.Temperature = Number(Temperature);
 			thermometerInside.Humidity = Number(Humidity);
 			SharedEventBus.emit("sensors.temp.inside", null, thermometerInside);
 		} else if (Command === "TEMP_OUTSIDE_READ") {
-			console.log("Got temperature outside: " + Temperature + " and humidity: " + Humidity);
+		 
 			thermometerOutside.Temperature = Number(Temperature);
 			thermometerOutside.Humidity = Number(Humidity);
 
@@ -77,3 +83,23 @@ proc.on("exit", (code, signal) => {
 proc.on("close", (code, signal) => {
 	console.log("[Thermometers] IsolatedDHTReader closed with code " + code + " and signal " + signal);
 });
+
+
+function readProcTemp() {
+	fs.readFile("/sys/class/thermal/thermal_zone0/temp", (err, data) => {
+		if (err) {
+			console.log("[Thermometers] Failed to read CPU temperature: " + err);
+			setTimeout(readProcTemp, 1000); // Try again in 1 second.
+			return;
+		}
+		// Linux stores the temperature in millidegrees Celsius.
+		const temp = Number(data.toString().trim()) / 1000;
+		thermometerCPU.Temperature = temp;
+		SharedEventBus.emit("sensors.temp.cpu", null, thermometerCPU);
+	 
+		setTimeout(readProcTemp, 3000); // Another read in 3 seconds.
+	});
+}
+
+// Start the CPU temperature reader.
+readProcTemp();

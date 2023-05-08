@@ -46,13 +46,13 @@ export function tryLockOutput(toggleName: string): boolean {
    if (toggle && !toggle.hasLock) {
       toggle.hasLock = true;
       toggle.lastChanged = Date.now();
-      saveDataSync();
+ 
      
       return true;
    } else {
       console.log("Failed to lock", toggleName);
       console.log("It may be in use");
-      saveDataSync();
+     
       
       return false;
    }
@@ -64,7 +64,7 @@ export function releaseOutput(toggleName: string): void {
    if (toggle) {
       toggle.hasLock = false;
    }
-   saveDataSync();
+ 
 }
 
 export function getPersistedOutputs(): DeviceBaseToggle[] {
@@ -76,5 +76,14 @@ export function toggleOutput(toggleName: string, toggleValue: boolean): void {
    if (toggle) {
       toggle.toggleValue = toggleValue;
    }
-   saveDataSync();
+ 
+}
+
+
+export function getToggleTypeFromOutputName(toggleName: string): ToggleType | undefined {
+   const toggle = findToggle(toggleName);
+   if (toggle) {
+      return toggle.toggleType;
+   }
+ 
 }

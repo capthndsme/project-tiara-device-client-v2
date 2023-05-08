@@ -2,6 +2,12 @@ import fs from "node:fs";
 import { SharedEventBus as eventBus } from "../Components/SharedEventBus";
 import { ScheduledTask, ScheduledTaskBase, SchedulerTime, TempTriggerArray } from "../Types/Scheduler";
 import { Thermometer } from "../Types/DeviceSensors";
+import { createNotification } from "../Components/NotificationSender";
+import { NotificationType } from "../Types/NotificationType";
+import { getToggleTypeFromOutputName } from "../PersistedOutput";
+import { ToggleType } from "../Types/DeviceBaseToggle";
+import { ToggleResult } from "../Types/ToggleResult";
+import { SchedulerTimeToTime } from "../Components/SchedulerTimeToTime";
 let scheduler: Array<ScheduledTask> = [];
 
 export function getScheduledTasks(): Array<ScheduledTask> {
@@ -133,23 +139,42 @@ function execute(key: string, eventHandle: SchedulerTime, triggerType: string, t
 	 *
 	 */
 	let callbackNoter;
-
+	createNotification(
+		key + " automation started",
+		`Automation for "${key}" has started.`,
+		NotificationType.AUTOMATION_STARTED,
+		Date.now()
+	)
 	eventBus.emit("ToggleEventSystemTriggered", null, {
 		toggleName: key,
 		toggleValue: toggleValue,
-		callback: (data) => {
+		callback: (data: ToggleResult) => {
 			// Update lastExecuted
-			if (data.hasError) {
-				console.warn(`[Scheduler] Executed scheduled task ${key} but the callback returned an error: ${data.error}`);
-			}
-
+			if (!data.success) {
+				console.warn(`[Scheduler] Executed scheduled task ${key} but the callback returned an error: ${data.message}`);
+				createNotification(
+					key + " automation execution failure",
+					`Automation for "${key}" failed with error: ${data.message}`,
+					NotificationType.AUTOMATION_ERROR,
+					Date.now()
+				)
+				return;
+			} 
+			createNotification(
+				key + " automation finished" ,
+				`Automation for "${key}" succeeded!`,
+				NotificationType.AUTOMATION_FINISHED,
+				Date.now()
+			)
 			eventHandle.lastExecuted = Date.now();
+			
 			fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
 			clearTimeout(callbackNoter);
 		},
 	});
 	callbackNoter = setTimeout(() => {
 		console.warn(`[Scheduler] Executed scheduled task ${key} but the callback was not called within 2 minutes.`);
+		
 	}, 120000);
 }
 function executeTemp(key: string, eventHandle: TempTriggerArray, triggerType: string, toggleValue: boolean) {
@@ -246,6 +271,12 @@ function ParseSchedulesAndTriggers() {
 							new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, everyArray[i][0], everyArray[i][1]).getTime() -
 							now.getTime();
 						console.log("Target time has already passed today. Scheduling execution for tomorrow...");
+						createNotification(
+							localScheduler.outputName + " automation skipped",
+							`Automation for "${localScheduler.outputName}" every skipped because the target time (${SchedulerTimeToTime(everyArray[i].time)}) has already passed today. It will be executed tomorrow, or you may manually execute it now.`,
+							NotificationType.AUTOMATION_ERROR,
+							Date.now()
+						)
 						const timeout = setTimeout(() => {
 							// Once we got our timeout executed for tomorrow, we will now set
 							// a daily setInterval to execute the function every day at the target time.
@@ -354,9 +385,15 @@ function ParseSchedulesAndTriggers() {
 							new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, from[0], from[1]).getTime() - now.getTime();
 						const tomorrowTo = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, to[0], to[1]).getTime() - now.getTime();
 						console.log(
-							"[Scheduler] Target time has already passed today. Scheduling %s's execution for tomorrow...",
+							"[Scheduler] Time-range target time has already passed today. Scheduling %s's execution for tomorrow...",
 							localScheduler.outputName
 						);
+						createNotification(
+							localScheduler.outputName + " Automation skipped",
+							`Automation for "${localScheduler.outputName}" Time-Range skipped because the target time (${SchedulerTimeToTime(localScheduler.timeRange?.from.time)} - ${SchedulerTimeToTime(localScheduler.timeRange?.to.time)}) has already passed today. It will be executed tomorrow, or you may manually execute it now.`,
+							NotificationType.AUTOMATION_ERROR,
+							Date.now()
+						)
 						const fromTimeout = setTimeout(() => {
 							// Once we got our timeout executed for tomorrow, we will now set
 							// a daily setInterval to execute the function every day at the target time.
@@ -425,11 +462,37 @@ export function insertScheduledTask(scheduledTask: ScheduledTask): boolean {
 	// Clear all pending timeouts and intervals
 
 	// Duplicate checking
+	let hasAnyDuplicate = false;
 	for (let i = 0; i < scheduler.length; i++) {
 		if (scheduler[i].outputName === scheduledTask.outputName) {
-			console.log("[Scheduler] Output already registered.");
-			return false;
+			console.log("[Scheduler] Output already registered. Replacing existing schedule...");
+			scheduler[i] = scheduledTask;
+			hasAnyDuplicate = true;
 		}
+	}
+
+	// Data cleanup in accordance to selected toggles toggletype.
+	const type = getToggleTypeFromOutputName(scheduledTask.outputName);
+	if (type) {
+		console.log("Running data cleanup for %s", scheduledTask.outputName);
+
+		if (type === ToggleType.ONEOFF) {
+			if (scheduledTask.timeRange) {
+				console.log("Removing timeRange from %s", scheduledTask.outputName);
+				scheduledTask.timeRange = null;
+			}
+			if (scheduledTask.tempRange) {
+				console.log("Removing tempRange from %s", scheduledTask.outputName);
+				scheduledTask.tempRange = null;
+			}
+		} else if (type === ToggleType.SWITCH) {
+			if (scheduledTask.every) {
+				console.log("Removing every from %s", scheduledTask.outputName);
+				scheduledTask.every = null;
+			}
+		}
+	} else {
+		console.log("No toggle type found for %s", scheduledTask.outputName);
 	}
 	for (let i = 0; i < timeoutArray.length; i++) {
 		clearTimeout(timeoutArray[i]);
@@ -437,15 +500,21 @@ export function insertScheduledTask(scheduledTask: ScheduledTask): boolean {
 	for (let i = 0; i < intervalArray.length; i++) {
 		clearInterval(intervalArray[i]);
 	}
-	scheduler.push(scheduledTask);
+	// Prevent duplicate schedules
+	if (!hasAnyDuplicate) scheduler.push(scheduledTask);
 	fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
 	ParseSchedulesAndTriggers();
 	return true;
 }
+ 
+/**
+* @deprecated We dont need to register outputs anymore. The user should manually add any trigger to the scheduler.
+*/
 export function addOutput(outputName) {
+	console.trace("DEPRECATED CALL: addOutput", outputName)
 	// Creates an output.
 	// We will also register this to our DeviceState.
-
+/* 
 	for (let i = 0; i < scheduler.length; i++) {
 		if (scheduler[i].outputName === outputName) {
 			console.log("[Scheduler] Output %s already registered.", outputName);
@@ -472,5 +541,5 @@ export function addOutput(outputName) {
 	}
 
 	fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
-	ParseSchedulesAndTriggers();
+	ParseSchedulesAndTriggers(); */
 }

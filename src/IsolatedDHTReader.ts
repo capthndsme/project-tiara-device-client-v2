@@ -12,6 +12,7 @@ let thermometerOutside: Thermometer = {
 export let thermometerRegions: ThermometerRegions = {
 	Inside: thermometerInside,
 	Outside: thermometerOutside,
+	CPU: null
 };
 
 // When this file is imported, we should initialise or node-dht-sensor library.

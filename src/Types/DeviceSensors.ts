@@ -4,7 +4,8 @@ export type DeviceSensors = {
 
 export type ThermometerRegions = {
    Inside: Thermometer | null,
-   Outside: Thermometer | null
+   Outside: Thermometer | null,
+   CPU: Thermometer | null
 }
  
 export type Thermometer = {

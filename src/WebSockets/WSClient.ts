@@ -113,6 +113,6 @@ export function getSocket(): Socket {
 }
 
 socket.on("AddTrigger", (data: ScheduledTask, callback: (any) => void) => {
-   const insertSuccess= insertScheduledTask(data);
+   const insertSuccess = insertScheduledTask(data);
    callback({success: insertSuccess});
 });
