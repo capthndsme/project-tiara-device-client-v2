@@ -52,8 +52,7 @@ export function tryLockOutput(toggleName: string): boolean {
    } else {
       console.log("Failed to lock", toggleName);
       console.log("It may be in use");
-     
-      
+      console.log("VARS", toggle, toggleName)
       return false;
    }
 
