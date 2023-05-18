@@ -1,22 +1,30 @@
 import fs from "node:fs";
 import { SharedEventBus as eventBus } from "../Components/SharedEventBus";
-import { ScheduledTask, ScheduledTaskBase, SchedulerTime, TempTriggerArray } from "../Types/Scheduler";
+import { ScheduledTask, SchedulerTime, TempTriggerArray } from "../Types/Scheduler";
 import { Thermometer } from "../Types/DeviceSensors";
 import { createNotification } from "../Components/NotificationSender";
 import { NotificationType } from "../Types/NotificationType";
-import { getToggleTypeFromOutputName } from "../PersistedOutput";
+import { getToggleTypeFromOutputName, findToggle } from "../PersistedOutput";
 import { ToggleType } from "../Types/DeviceBaseToggle";
 import { ToggleResult } from "../Types/ToggleResult";
 import { SchedulerTimeToTime } from "../Components/SchedulerTimeToTime";
+import { ToggleEvent } from "../Types/ToggleEvent";
 let scheduler: Array<ScheduledTask> = [];
 
 export function getScheduledTasks(): Array<ScheduledTask> {
 	return scheduler;
 }
+/**
+ * @todo: There is a bug where if the device is not in the same 
+ * timezone as the user's browser, the scheduler will not work correctly.
+ * Find a solution for this, but its a low priority issue. 
+ * Could be worked around by having the client send in their timezone.
+ */
 function getSecondsUntilTargetTime(timeArr) {
 	const now = new Date(); // get current date and time
 	const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), timeArr[0], timeArr[1]); // create a new date object with the target time today
 	const secondsUntilTargetTime = (targetTime.getTime() - now.getTime()) / 1000; // calculate the number of seconds until the target time
+	console.log("Time debug", secondsUntilTargetTime, now.toLocaleString(), targetTime.toLocaleString(), timeArr);
 	if (secondsUntilTargetTime < 0) {
 		// if the target time has already passed today
 		return false; // return false
@@ -29,6 +37,18 @@ function getSecondsUntilTargetTime(timeArr) {
 let timeoutArray: Array<NodeJS.Timeout> = [];
 let intervalArray: Array<NodeJS.Timer> = [];
 let tempTriggerArrays: Array<TempTriggerArray> = [];
+// Override array means the user has manually turned on/off the output.
+// Applicable for "TempRange" and "TimeRange" triggers.
+// Right now only TempRange is implemented, and realistiaclly it is the only one that needs to be implemented.
+let overrideArray: Array<boolean> = [];
+function checkOverride(scheduledTaskName: string) {
+	 return overrideArray[scheduledTaskName];
+} 
+
+export function setOverride(scheduledTaskName: string, value: boolean) {
+	overrideArray[scheduledTaskName] = value;
+}
+
 const format = {
 	scheduledTaskName: {
 		outputName: "",
@@ -39,7 +59,7 @@ const format = {
 			},
 			{
 				time: [17, 30],
-				lastExecuted: -1,
+				lastExecuted: -1, 
 			},
 		],
 		tempRange: [28, 31],
@@ -59,7 +79,7 @@ const format = {
 //
 function throttle(callback: { apply: (arg0: any, arg1: IArguments) => void }, interval: number) {
 	// Initialize a timer variable
-	let timer = null;
+	let timer: NodeJS.Timer | null = null;
 	// Return a function that will be called when the event occurs
 	return function () {
 		// If the timer is null, it means we can run the callback function
@@ -85,22 +105,23 @@ function tempReceiver(data: Thermometer) {
 			// If current temperature is within the range, turn on the output.
 			// If current tempearture is lower than the lower bound, turn off the output.
 			// If current temperature is higher than the upper bound, the output should remain on.
-			if (data.Temperature >= trigger.triggerOnTemp && data.Temperature <= trigger.triggerOnTemp) {
-				executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
-			} else if (data.Temperature < trigger.triggerOffTemp) {
-				executeTemp(trigger.scheduledTaskName, trigger, "temp", false);
-			} else if (data.Temperature > trigger.triggerOnTemp) {
-				// The current temperature is higher than the upper bound, but the output should remain on.
-				executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
+			if (checkOverride(trigger.scheduledTaskName)) {
+				// currentToggleState allows us to check if the output is already on or off, so we don't send duplicate commands.
+				const localToggle = findToggle(trigger.scheduledTaskName);
+				if (!localToggle) console.warn("Can not find toggle for some reason. Trigger object" + trigger)
+				const currentToggleState = localToggle?.toggleValue || false; // If the toggle is not found, assume it is off.
+				if (data.Temperature >= trigger.triggerOnTemp && data.Temperature <= trigger.triggerOnTemp && !currentToggleState ) {
+					executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
+				} else if (data.Temperature < trigger.triggerOffTemp && !currentToggleState) {
+					executeTemp(trigger.scheduledTaskName, trigger, "temp", false);
+				} else if (data.Temperature > trigger.triggerOnTemp && !currentToggleState) {
+					// The current temperature is higher than the upper bound, but the output should remain on.
+					executeTemp(trigger.scheduledTaskName, trigger, "temp", true);
+				}  
 			} else {
-				console.warn(
-					"[Scheduler] What is happening key:%s eventTemp:%sC lowBound: %sC highBound: %sC.",
-					trigger.scheduledTaskName,
-					data.Temperature,
-					trigger.triggerOffTemp,
-					trigger.triggerOnTemp
-				);
+				console.log("Skipping temp trigger because of override.");
 			}
+			
 		}
 	}
 }
@@ -133,6 +154,7 @@ export function initScheduler() {
 
 // utilities
 function execute(key: string, eventHandle: SchedulerTime, triggerType: string, toggleValue: boolean) {
+ 
 	console.log(`Executing ${key}'s ${triggerType}-type schedulable...`);
 	/**
 	 * TODO: A POST request to the server to update the toggle value, so the web server will also know our Local State.
@@ -145,9 +167,10 @@ function execute(key: string, eventHandle: SchedulerTime, triggerType: string, t
 		NotificationType.AUTOMATION_STARTED,
 		Date.now()
 	)
-	eventBus.emit("ToggleEventSystemTriggered", null, {
+	const emit: ToggleEvent = {
 		toggleName: key,
 		toggleValue: toggleValue,
+		toggleType: ToggleType.ONEOFF, // We don't care about this when triggering.
 		callback: (data: ToggleResult) => {
 			// Update lastExecuted
 			if (!data.success) {
@@ -171,7 +194,8 @@ function execute(key: string, eventHandle: SchedulerTime, triggerType: string, t
 			fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
 			clearTimeout(callbackNoter);
 		},
-	});
+	}
+	eventBus.emit("ToggleEventSystemTriggered", null, emit);
 	callbackNoter = setTimeout(() => {
 		console.warn(`[Scheduler] Executed scheduled task ${key} but the callback was not called within 2 minutes.`);
 		
@@ -310,14 +334,16 @@ function ParseSchedulesAndTriggers() {
 		const timeRange = localScheduler.timeRange;
 		if (timeRange) {
 			console.log("Output %s has TIMERANGE", localScheduler.outputName);
+			
 			const from = timeRange.from.time;
 			const to = timeRange.to.time;
+			console.log("times:", from, to)
 			if (from && to) {
 				// TimeRange trigger is a bit more and less complicated than Every trigger, somehow.
 
 				// 1: Determine seconds until trigger start | end
-				const secondsUntilTriggerStart = getSecondsUntilTargetTime(localScheduler.timeRange.from.time);
-				const secondsUntilTriggerEnd = getSecondsUntilTargetTime(localScheduler.timeRange.to.time);
+				const secondsUntilTriggerStart = getSecondsUntilTargetTime(timeRange.from.time);
+				const secondsUntilTriggerEnd = getSecondsUntilTargetTime(timeRange.to.time);
 
 				// 2: Check if the trigger start time has passed today.
 				// If it has passed, let's check if the trigger end is also passed today.
@@ -335,11 +361,11 @@ function ParseSchedulesAndTriggers() {
 					const timeout = setTimeout(() => {
 						// Once we got our timeout executed for later, we will now set
 						// a daily setInterval to execute the function every day at the target time.
-						execute(localScheduler.outputName, localScheduler.timeRange.from, "timeRange", true);
+						execute(localScheduler.outputName, timeRange.from, "timeRange", true);
 						const interval = setInterval(() => {
 							// Execute function.
 							// Note that in triggerStart timeRange type schedulable, toggleValue is always true.
-							execute(localScheduler.outputName, localScheduler.timeRange.from, "timeRange", true);
+							execute(localScheduler.outputName, timeRange.from, "timeRange", true);
 						}, 86400 * 1000);
 						intervalArray.push(interval);
 					}, secondsUntilTriggerStart * 1000);
@@ -350,7 +376,7 @@ function ParseSchedulesAndTriggers() {
 						const endTimeInterval = setInterval(() => {
 							// Execute function.
 							// Note that in triggerEnd timeRange type schedulable, toggleValue is always false.
-							execute(localScheduler.outputName, localScheduler.timeRange.to, "timeRange", false);
+							execute(localScheduler.outputName, timeRange.to, "timeRange", false);
 						}, 86400 * 1000);
 						intervalArray.push(endTimeInterval);
 					}, secondsUntilTriggerEnd * 1000);
@@ -361,17 +387,17 @@ function ParseSchedulesAndTriggers() {
 						// Trigger end has not passed today.
 						// It means that we are still within the trigger time range.
 						// It means that we should turn on the output.
-						execute(localScheduler.outputName, localScheduler.timeRange.from, "timeRange", true);
+						execute(localScheduler.outputName, timeRange.from, "timeRange", true);
 
 						// Here we schedule a triggerEnd timeout and interval because we are still within the trigger time range..
 						const endTimeTimeout = setTimeout(() => {
 							// Create a timeout to execute the function at the trigger end time.
 							// This timeout will be used to turn off the output.
-							execute(localScheduler.outputName, localScheduler.timeRange.to, "timeRange", false);
+							execute(localScheduler.outputName, timeRange.to, "timeRange", false);
 							const endTimeInterval = setInterval(() => {
 								// Execute function.
 								// Note that in triggerEnd timeRange type schedulable, toggleValue is always false.
-								execute(localScheduler.outputName, localScheduler.timeRange.to, "timeRange", false);
+								execute(localScheduler.outputName, timeRange.to, "timeRange", false);
 							}, 86400 * 1000);
 							intervalArray.push(endTimeInterval);
 						}, secondsUntilTriggerEnd * 1000);
@@ -390,18 +416,18 @@ function ParseSchedulesAndTriggers() {
 						);
 						createNotification(
 							localScheduler.outputName + " Automation skipped",
-							`Automation for "${localScheduler.outputName}" Time-Range skipped because the target time (${SchedulerTimeToTime(localScheduler.timeRange?.from.time)} - ${SchedulerTimeToTime(localScheduler.timeRange?.to.time)}) has already passed today. It will be executed tomorrow, or you may manually execute it now.`,
+							`Automation for "${localScheduler.outputName}" Time-Range skipped because the target time (${SchedulerTimeToTime(timeRange?.from.time)} - ${SchedulerTimeToTime(timeRange?.to.time)}) has already passed today. It will be executed tomorrow, or you may manually execute it now.`,
 							NotificationType.AUTOMATION_ERROR,
 							Date.now()
 						)
 						const fromTimeout = setTimeout(() => {
 							// Once we got our timeout executed for tomorrow, we will now set
 							// a daily setInterval to execute the function every day at the target time.
-							execute(localScheduler.outputName, localScheduler.timeRange.from, "timeRange", true);
+							execute(localScheduler.outputName, timeRange.from, "timeRange", true);
 							const interval = setInterval(() => {
 								// Execute function.
 								// Note that in triggerStart timeRange type schedulable, toggleValue is always true.
-								execute(localScheduler.outputName, localScheduler.timeRange.from, "timeRange", true);
+								execute(localScheduler.outputName, timeRange.from, "timeRange", true);
 							}, 86400 * 1000);
 							intervalArray.push(interval);
 						}, tomorrowFrom);
@@ -409,11 +435,11 @@ function ParseSchedulesAndTriggers() {
 						const toTimeout = setTimeout(() => {
 							// Once we got our timeout executed for tomorrow, we will now set
 							// a daily setInterval to execute the function every day at the target time.
-							execute(localScheduler.outputName, localScheduler.timeRange.to, "timeRange", false);
+							execute(localScheduler.outputName, timeRange.to, "timeRange", false);
 							const interval = setInterval(() => {
 								// Execute function.
 								// Note that in triggerEnd timeRange type schedulable, toggleValue is always false.
-								execute(localScheduler.outputName, localScheduler.timeRange.to, "timeRange", false);
+								execute(localScheduler.outputName, timeRange.to, "timeRange", false);
 							}, 86400 * 1000);
 							intervalArray.push(interval);
 						}, tomorrowTo);

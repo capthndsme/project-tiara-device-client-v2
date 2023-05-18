@@ -182,3 +182,29 @@ function SnapshotService() {
 }
 console.log("[StreamController] Start snapshot service")
 SnapshotService();
+
+SharedEventBus.on("ManualPicture", () => {
+	const stream = spawn("libcamera-jpeg", ["--output", "/tmp/snapshot.jpg", "-q", "96"]);
+	stream.on("exit", (code) => {
+		 console.log("Snapshot exit code", code)
+		 if (code !== 0) {
+			  return console.log("[StreamController] Failed to take snapshot");
+		 }
+		 // Send the image to the backend server
+		 const file = fs.createReadStream("/tmp/snapshot.jpg");
+		 if (!file) {
+			 console.log("[StreamController] Failed to read snapshot file")
+			 
+		 }
+		 const form = new FormData();
+		 form.append("file", file, {filename: "snapshot.jpg", contentType: "image/jpeg"});
+		 console.log(form);
+		 axios.post(config.syncUrl + "/v1/cameraPreviews/push", 
+		 form
+		 , {timeout: 45000, headers: {
+			 ...form.getHeaders(),
+			 "x-device-hwid": HWID_STRING,
+			 "x-device-session": config.deviceToken,
+		 }})
+		})
+})

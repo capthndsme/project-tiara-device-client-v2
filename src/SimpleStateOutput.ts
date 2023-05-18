@@ -10,7 +10,7 @@ import { ToggleResult } from "./Types/ToggleResult";
 
 export function SimpleStateOutput(pin: number, name: string, description: string, toggleType: ToggleType): void {
    console.log(`[SimpleStateOutput] Creating simple state output object for ${name}`);
-   addOutput(name);
+   
    createOutput(name, description, toggleType)
    SharedRPIO.open(pin, SharedRPIO.OUTPUT, SharedRPIO.HIGH);
    OutputToggleBase(

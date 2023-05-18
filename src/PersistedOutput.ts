@@ -14,6 +14,10 @@ if (fs.existsSync(PersistedFile)) {
          console.warn(`Output ${key} has lock. Unclean shutdown? Unlocking`);
          localData[key].hasLock = false;
          }
+         if (localData[key].toggleValue) {
+            console.log("Turning off.", localData[key].toggleName);
+            localData[key].toggleValue = false;
+         }
       }
    } catch (e) {
       console.warn("Invalid OutputPersists, re-creating.", e);
@@ -44,6 +48,7 @@ export function createOutput(toggleName: string, toggleDescription: string, togg
 export function tryLockOutput(toggleName: string): boolean {
    const toggle = findToggle(toggleName);
    if (toggle && !toggle.hasLock) {
+      console.trace("LOCK TOGGLE TRACE: ", toggleName)
       toggle.hasLock = true;
       toggle.lastChanged = Date.now();
  
@@ -52,17 +57,19 @@ export function tryLockOutput(toggleName: string): boolean {
    } else {
       console.log("Failed to lock", toggleName);
       console.log("It may be in use");
-      console.log("VARS", toggle, toggleName)
+      console.log("VARS", toggle, toggleName, localData)
       return false;
    }
 
 }
 
 export function releaseOutput(toggleName: string): void {
+   console.trace("RELEASE TOGGLE TRACE: ", toggleName)
    const toggle = findToggle(toggleName);
    if (toggle) {
       toggle.hasLock = false;
    }
+   saveDataSync();
  
 }
 

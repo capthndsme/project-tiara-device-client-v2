@@ -9,7 +9,11 @@ import * as ServoController from "./ServoController";
 import * as WSClient from "./WebSockets/WSClient"
 import * as Scheduler from "./ScheduledTask/Scheduler"
 console.log("[PTClient] Initialising client...");
-Scheduler.initScheduler();
+SharedEventBus.on("ServoReady", () => {
+   // Wait for our servo to be ready before we start our scheduler.
+   console.log("[PTClient] Servo is ready. Starting scheduler...");
+   Scheduler.initScheduler();
+})
 // Load our outputs here...
 fs.readdirSync(__dirname + "/Output/").forEach((file) => {
    if (file.endsWith(".map")) return; // Do not attempt to load .map files.

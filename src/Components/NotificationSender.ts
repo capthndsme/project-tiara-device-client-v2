@@ -40,6 +40,7 @@ export function createNotification(title: string, message: string, type: Notific
 		sentTimestamp: date ?? Date.now(),
 		type,
 	};
+ 
 	notificationQueue.push({
 		notification,
 		sent: false,

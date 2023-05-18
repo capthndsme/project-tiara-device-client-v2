@@ -27,9 +27,9 @@ function FoodDispenseAction(repeat: number = 3): Promise<void> {
                   write(ServoTypes.FoodDispenser, 0).then(() => {
                      return FoodDispenseAction(repeat - 1).then(resolve); // Add this line
                   });
-               }, 200);
+               }, 50);
             });
-         }, 100);
+         }, 190);
       });
       // Delay start
 	}
@@ -186,7 +186,7 @@ function DoorLock(event: ToggleEvent): Promise<ToggleResult>  {
    return new Promise((resolve) => {
       write(
          ServoTypes.DoorLock,
-         event.toggleValue ? 90 : 0,
+         event.toggleValue ? 100 : 0,
       ).then(() => {
          resolve({
             success: true,

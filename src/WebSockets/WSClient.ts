@@ -21,7 +21,8 @@ export const socket = io(config.syncUrl + "/device", {
       deviceToken: config.deviceToken
    }
 });
-
+// This is used to prevent the connect event from firing multiple times
+let  connectOnceIndicator = true;
 // Write a function to average the latency of the websocket
 let slidingWindow = new Array<number>();
 function addToSlidingWindow(latency: number) {
@@ -72,28 +73,30 @@ export function connect() {
 
 socket.on("connect", () => {
    console.log("Connected to server");
-   createNotification(
+   
+createNotification(
       "Device went online",
       "Device is online and connected to the server.",
       NotificationType.SYSTEM_STARTED
    )
    // Websocket is connected, emit event for other subsystems to use
    SharedEventBus.emit("WSClientConnected");
-   socket.on("ToggleStateMutate", (data: DeviceBaseToggle, callback) => {
-      console.log("ToggleStateMutate", data.toggleName);
-      const toggleEvent: ToggleEvent = {
-         ...data,
-         callback: callback
-      }
-      SharedEventBus.emit("ToggleEvent", null, toggleEvent);
-   });
+  
    console.log("Connected, syncing device state", localDeviceState);
    socket.emit("SyncDeviceState", localDeviceState);
-   socket.on("CameraStreamRequest", (data: any, callback: any) => {
-      SharedEventBus.emit("CameraStreamRequest", null, {...data, callback});
-   });
-});
 
+});
+socket.on("ToggleStateMutate", (data: DeviceBaseToggle, callback) => {
+   console.log("ToggleStateMutate", data.toggleName);
+   const toggleEvent: ToggleEvent = {
+      ...data,
+      callback: callback
+   }
+   SharedEventBus.emit("ToggleEvent", null, toggleEvent);
+});
+socket.on("CameraStreamRequest", (data: any, callback: any) => {
+   SharedEventBus.emit("CameraStreamRequest", null, {...data, callback});
+});
 socket.on("disconnect", () => {
    console.log("Disconnected from server");
    SharedEventBus.emit("WSClientDisonnected");
@@ -116,3 +119,7 @@ socket.on("AddTrigger", (data: ScheduledTask, callback: (any) => void) => {
    const insertSuccess = insertScheduledTask(data);
    callback({success: insertSuccess});
 });
+
+socket.on("ManualPicture", () => {
+   SharedEventBus.emit("ManualPicture");
+}) 

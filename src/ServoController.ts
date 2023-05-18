@@ -1,6 +1,7 @@
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 import { config } from "./Components/ConfLoader";
+import { SharedEventBus } from "./Components/SharedEventBus";
 export const port = new SerialPort({
   path: config.servoController,
   lock: false,
@@ -32,6 +33,7 @@ export enum ServoTypes {
   DoorLock = "DoorLock",
   PoopPad1 = "PoopPad1",
   PoopPad2 = "PoopPad2",
+  FDispFlip = "FDispFlip", // Food Dispenser Quick Flip action (avoids callback delay, BUT blocks other actions)
 }
 
 port.on("open", () => {
@@ -43,6 +45,7 @@ port.on("open", () => {
       console.log("ServoController: Servo is Ready!");
       port.flush();
       ServoReadyState = true;
+      SharedEventBus.emit("ServoReady");
     } else if (data.endsWith("UNK")) {
       console.log("Unknown command received", data);
       return port.flush();
