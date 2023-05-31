@@ -186,7 +186,7 @@ function DoorLock(event: ToggleEvent): Promise<ToggleResult>  {
    return new Promise((resolve) => {
       write(
          ServoTypes.DoorLock,
-         event.toggleValue ? 100 : 0,
+         event.toggleValue ? 95 : 0,
       ).then(() => {
          resolve({
             success: true,

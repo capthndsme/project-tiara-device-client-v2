@@ -58,7 +58,7 @@ function QueueWorker(manualTrigger = false): void {
 				getSocket()
 					.timeout(60000)
 					.emit("PushNotification", notification.notification, (error: boolean, data: { success: boolean }) => {
-						if (data.success && !error) {
+						if (data && data.success && !error) {
 							notification.sent = true;
 							notification.sentTimestamp = Date.now();
 							console.log(`[Notification] Successfully sent notification ${notification.notification.title}`);
