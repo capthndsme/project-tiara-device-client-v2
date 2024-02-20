@@ -102,9 +102,9 @@ function tempReceiver (data: Thermometer) {
 }
 export function initScheduler() {
 	console.log("[Scheduler] Starting scheduler...");
-	if (fs.existsSync("/home/captainhandsome/project-tiara-persistent/scheduler.json")) {
+	if (fs.existsSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json")) {
 		console.log("[Scheduler] Schedules loaded...");
-		scheduler = JSON.parse(fs.readFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", "utf8"));
+		scheduler = JSON.parse(fs.readFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", "utf8"));
 	} else {
 		// Schedules default layout
 		// Temperature unit is in Celsius.
@@ -114,7 +114,7 @@ export function initScheduler() {
 
 		scheduler = [];
 
-		fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
+		fs.writeFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", JSON.stringify(scheduler));
 		console.log("[Scheduler] No schedules - generating default...");
 	}
 	
@@ -147,7 +147,7 @@ function execute(key: string, eventHandle: SchedulerTime, triggerType: string, t
 			}
          
 			eventHandle.lastExecuted = Date.now();
-			fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
+			fs.writeFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", JSON.stringify(scheduler));
 			clearTimeout(callbackNoter);
 		},
 	});
@@ -173,7 +173,7 @@ function executeTemp(key: string, eventHandle: TempTriggerArray, triggerType: st
 			}
          
 			 
-			fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
+			fs.writeFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", JSON.stringify(scheduler));
 			clearTimeout(callbackNoter);
 		},
 	});
@@ -413,7 +413,7 @@ export function reloadSchedules() {
    }
    // Reload schedules
 
-   scheduler = JSON.parse(fs.readFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", "utf-8"));
+   scheduler = JSON.parse(fs.readFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", "utf-8"));
    
  
 	ParseSchedulesAndTriggers();
@@ -430,7 +430,7 @@ export function applyNewSchedules(schedules) {
    }
    // Apply new schedules, and save our received schedules to the file
    scheduler = schedules;
-   fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
+   fs.writeFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", JSON.stringify(scheduler));
    ParseSchedulesAndTriggers();
 }
 
@@ -469,8 +469,11 @@ export function addOutput(outputName) {
          clearInterval(intervalArray[i]);
       }
 
-      fs.writeFileSync("/home/captainhandsome/project-tiara-persistent/scheduler.json", JSON.stringify(scheduler));
+      fs.writeFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\scheduler.json", JSON.stringify(scheduler));
       ParseSchedulesAndTriggers();
    }
 }
 
+export function setOverride(x: any, y: any) {
+	
+}

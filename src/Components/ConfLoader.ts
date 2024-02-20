@@ -7,4 +7,4 @@ type Config = {
 }
 
 // Load the config file
-export const config: Config = JSON.parse(fs.readFileSync("/home/captainhandsome/project-tiara-persistent/config.json", "utf8")); 
+export const config: Config = JSON.parse(fs.readFileSync("C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\config.json", "utf8")); 

@@ -1,9 +1,8 @@
 import { DeviceBaseToggle } from "./DeviceBaseToggle";
+import { ToggleResult } from "./ToggleResult";
 
-export interface ToggleResult {
-   hasError?: boolean,
-   error?: string,
-}
-export interface ToggleEvent extends DeviceBaseToggle {
+
+export interface ToggleEvent<T = undefined> extends DeviceBaseToggle {
    callback: (result: ToggleResult) => void;
+   optionalOpts?: T;
 }

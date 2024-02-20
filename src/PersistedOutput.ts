@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { DeviceBaseToggle, ToggleType, createToggleTemplate } from "./Types/DeviceBaseToggle";
-const PersistedFile = "/home/captainhandsome/project-tiara-persistent/PersistedOutputs.json";
+const PersistedFile = "C:\\Users\\nieoy\\Projects\\project-tiara-persistent\\PersistedOutputs.json";
 export let localData: DeviceBaseToggle[] = [];
 
 // Load our existing data from file if it exists
